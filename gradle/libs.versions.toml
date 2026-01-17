@@ -8,7 +8,7 @@ aws-s3 = "2.40.9"
 mockito-kotlin = "6.1.0"
 kotest = "6.0.7"
 rest-assured = "6.0.0"
-testcontainer = "2.0.2"
+testcontainer = "2.0.3"
 
 [libraries]
 # development libraries
