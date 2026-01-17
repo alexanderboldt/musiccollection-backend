@@ -10,7 +10,6 @@ out/
 .gitignore
 
 # Environment & config files
-*.env
 .env
 *.log
 
