@@ -1,0 +1,21 @@
+namespace: musiccollection
+
+resources:
+  - namespace.yml
+  - postgres/statefulset.yml
+  - postgres/service.yml
+  - postgres-keycloak/statefulset.yml
+  - postgres-keycloak/service.yml
+  - keycloak/deployment.yml
+  - keycloak/service.yml
+
+secretGenerator:
+  - name: postgres-secret
+    envs:
+      - secrets/postgres.env
+  - name: postgres-keycloak-secret
+    envs:
+      - secrets/postgres-keycloak.env
+  - name: keycloak-secret
+    envs:
+      - secrets/keycloak.env
