@@ -22,12 +22,11 @@ This is a backend application for managing the music-library like artists and al
 ### Buildsystem
 - Gradle
 
-## Install
-1. Build the quarkus docker image:
-```bash
-./gradlew clean quarkusBuild
-```
-2. Create and start the containers:
+### CI/CD
+- GitHub Actions
+
+## Install with Docker
+Create and start the containers:
 ```bash
 docker compose up -d
 ```
