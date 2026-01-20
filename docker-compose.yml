@@ -52,7 +52,7 @@ services:
       - musiccollection
 
   app:
-    image: musiccollection/app:7.0.0
+    image: ghcr.io/alexanderboldt/musiccollection:7.0.0
     container_name: musiccollection-app
     env_file:
       - postgres.env
