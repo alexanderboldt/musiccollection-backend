@@ -6,5 +6,5 @@ spec:
   selector:
     app: keycloak
   ports:
-    - port: 4010 # internal cluster port
+    - port: 8080 # internal cluster port
       targetPort: 8080

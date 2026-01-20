@@ -8,6 +8,10 @@ resources:
   - postgres-keycloak/service.yml
   - keycloak/deployment.yml
   - keycloak/service.yml
+  - minio/statefulset.yml
+  - minio/service.yml
+  - musiccollection/deployment.yml
+  - musiccollection/service.yml
 
 secretGenerator:
   - name: postgres-secret
@@ -19,3 +23,9 @@ secretGenerator:
   - name: keycloak-secret
     envs:
       - secrets/keycloak.env
+  - name: minio-secret
+    envs:
+      - secrets/minio.env
+  - name: musiccollection-secret
+    envs:
+      - secrets/musiccollection.env

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: musiccollection
+spec:
+  selector:
+    matchLabels:
+      app: musiccollection
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: musiccollection
+    spec:
+      containers:
+        - name: musiccollection
+          image: ghcr.io/alexanderboldt/musiccollection:7.0.0
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: postgres-secret
+            - secretRef:
+                name: minio-secret
+            - secretRef:
+                name: musiccollection-secret
+          ports:
+            - containerPort: 4000
