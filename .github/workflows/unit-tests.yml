@@ -2,14 +2,15 @@ name: Unit Tests
 
 on:
   push:
-  workflow_dispatch:
 
 jobs:
   unit-tests:
+    name: Unit Tests
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout the code
+        uses: actions/checkout@v4
 
       - name: Set up JDK
         uses: actions/setup-java@v4
@@ -17,8 +18,13 @@ jobs:
           distribution: temurin
           java-version: 21
 
-      - name: Grant execute permission
-        run: chmod +x gradlew
-
       - name: Run unit tests
         run: ./gradlew clean test --tests "org.musiccollection.util.*"
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-test-report
+          path: build/reports/tests/
+          retention-days: 14
