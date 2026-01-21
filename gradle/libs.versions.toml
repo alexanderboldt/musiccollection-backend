@@ -6,7 +6,7 @@ aws-s3 = "2.40.9"
 
 # test versions
 mockito-kotlin = "6.1.0"
-kotest = "6.0.7"
+kotest = "6.1.0"
 rest-assured = "6.0.0"
 testcontainer = "2.0.3"
 
