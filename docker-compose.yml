@@ -2,8 +2,7 @@ services:
   postgres:
     image: postgres:17.4
     container_name: musiccollection-postgres
-    env_file:
-      - postgres.env
+    env_file: kustomize/base/secrets/postgres.env
     ports:
       - 5432:5432
     volumes:
@@ -14,8 +13,7 @@ services:
   postgres-keycloak:
     image: postgres:17.4
     container_name: musiccollection-postgres-keycloak
-    env_file:
-      - postgres-keycloak.env
+    env_file: kustomize/base/secrets/postgres-keycloak.env
     ports:
       - 5433:5432
     volumes:
@@ -26,28 +24,27 @@ services:
   keycloak:
     image: quay.io/keycloak/keycloak:26.3.2
     container_name: musiccollection-keycloak
-    env_file:
-      - keycloak.env
+    command: start-dev --import-realm
+    env_file: kustomize/base/secrets/keycloak.env
     ports:
       - 8080:8080
-    command:
-      - start-dev
-    networks:
-      - musiccollection
+    volumes:
+      - ./keycloak:/opt/keycloak/data/import
     depends_on:
       - postgres-keycloak
+    networks:
+      - musiccollection
 
   minio:
     image: minio/minio
     container_name: musiccollection-minio
-    env_file:
-      - minio.env
+    command: server --console-address ":9001" /data
+    env_file: kustomize/base/secrets/minio.env
     ports:
       - 9000:9000
       - 9001:9001
     volumes:
       - minio_data:/data
-    command: server --console-address ":9001" /data
     networks:
       - musiccollection
 
@@ -55,9 +52,9 @@ services:
     image: ghcr.io/alexanderboldt/musiccollection:7.0.0
     container_name: musiccollection-app
     env_file:
-      - postgres.env
-      - minio.env
-      - musiccollection.env
+      - kustomize/base/secrets/postgres.env
+      - kustomize/base/secrets/minio.env
+      - kustomize/base/secrets/musiccollection.env
     ports:
       - 4000:4000
     depends_on:

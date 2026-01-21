@@ -14,7 +14,6 @@ quarkus:
     auth-server-url: http://keycloak:8080/realms/musiccollection
     application-type: service
     token:
-      issuer: http://localhost:8080/realms/musiccollection
       principal-claim: sub
   s3:
     endpoint-override: http://minio:9000
