@@ -36,7 +36,7 @@ services:
       - musiccollection
 
   minio:
-    image: minio/minio
+    image: minio/minio:latest
     container_name: musiccollection-minio
     command: server --console-address ":9001" /data
     env_file: kustomize/base/secrets/minio.env
@@ -54,7 +54,8 @@ services:
     env_file:
       - kustomize/base/secrets/postgres.env
       - kustomize/base/secrets/minio.env
-      - kustomize/base/secrets/musiccollection.env
+    environment:
+      QUARKUS_PROFILE: stage
     ports:
       - 4000:4000
     depends_on:
