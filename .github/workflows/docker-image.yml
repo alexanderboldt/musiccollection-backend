@@ -1,10 +1,11 @@
 name: Build & push the docker image
 
 on:
-  workflow_dispatch:
+  release:
+    types: [published]
 
 jobs:
-  build:
+  docker:
     runs-on: ubuntu-latest
 
     permissions:
@@ -26,3 +27,4 @@ jobs:
         env:
           GITHUB_OWNER: ${{ github.repository_owner }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ github.ref_name }}

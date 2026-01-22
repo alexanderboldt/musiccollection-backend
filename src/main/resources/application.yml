@@ -19,7 +19,7 @@ quarkus:
     registry: ghcr.io
     group: ${GITHUB_OWNER}
     name: musiccollection
-    tag: 7.0.0
+    tag: ${RELEASE_TAG}
     additional-tags: latest
     username: ${GITHUB_OWNER}
     password: ${GITHUB_TOKEN}
