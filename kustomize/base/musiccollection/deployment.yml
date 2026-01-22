@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: musiccollection
-          image: ghcr.io/alexanderboldt/musiccollection:7.0.0
+          image: ghcr.io/alexanderboldt/musiccollection:7.1.0
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:

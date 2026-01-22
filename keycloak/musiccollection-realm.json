@@ -2547,11 +2547,10 @@
     "oauth2DeviceCodeLifespan": "600",
     "parRequestUriLifespan": "60",
     "clientSessionMaxLifespan": "0",
-    "frontendUrl": "http://localhost:8080",
     "shortVerificationUri": "",
     "actionTokenGeneratedByUserLifespan.reset-credentials": ""
   },
-  "keycloakVersion": "26.3.2",
+  "keycloakVersion": "26.5",
   "userManagedAccessAllowed": false,
   "organizationsEnabled": false,
   "verifiableCredentialsEnabled": false,

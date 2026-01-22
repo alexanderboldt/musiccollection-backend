@@ -22,7 +22,7 @@ services:
       - musiccollection
 
   keycloak:
-    image: quay.io/keycloak/keycloak:26.3.2
+    image: quay.io/keycloak/keycloak:26.5
     container_name: musiccollection-keycloak
     command: start-dev --import-realm
     env_file: kustomize/base/secrets/keycloak.env
@@ -49,7 +49,7 @@ services:
       - musiccollection
 
   app:
-    image: ghcr.io/alexanderboldt/musiccollection:7.0.0
+    image: ghcr.io/alexanderboldt/musiccollection:7.1.0
     container_name: musiccollection-app
     env_file:
       - kustomize/base/secrets/postgres.env
