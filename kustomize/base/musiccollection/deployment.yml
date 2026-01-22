@@ -21,7 +21,8 @@ spec:
                 name: postgres-secret
             - secretRef:
                 name: minio-secret
-            - secretRef:
-                name: musiccollection-secret
+          env:
+            - name: QUARKUS_PROFILE
+              value: stage
           ports:
             - containerPort: 4000

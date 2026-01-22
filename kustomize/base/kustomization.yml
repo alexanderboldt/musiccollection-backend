@@ -26,6 +26,3 @@ secretGenerator:
   - name: minio-secret
     envs:
       - secrets/minio.env
-  - name: musiccollection-secret
-    envs:
-      - secrets/musiccollection.env
