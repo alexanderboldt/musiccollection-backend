@@ -21,8 +21,5 @@ spec:
                 name: postgres-secret
             - secretRef:
                 name: minio-secret
-          env:
-            - name: QUARKUS_PROFILE
-              value: stage
           ports:
             - containerPort: 4000
