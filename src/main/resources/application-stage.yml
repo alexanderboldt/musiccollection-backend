@@ -11,12 +11,12 @@ quarkus:
     enabled: true
     migrate-at-start: true
   oidc:
-    auth-server-url: http://keycloak:8080/realms/musiccollection
+    auth-server-url: ${KC_URL}
     application-type: service
     token:
       principal-claim: sub
   s3:
-    endpoint-override: http://minio:9000
+    endpoint-override: ${MINIO_URL}
     path-style-access: true
     aws:
       region: us-east-1
