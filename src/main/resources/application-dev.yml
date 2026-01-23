@@ -19,7 +19,7 @@ quarkus:
     endpoint-override: http://localhost:9000
     path-style-access: true
     aws:
-      region: us-east-1
+      region: eu-central-1
       credentials:
         type: static
         static-provider:
