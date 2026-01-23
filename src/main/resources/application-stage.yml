@@ -4,7 +4,7 @@ quarkus:
   datasource:
     db-kind: postgresql
     jdbc:
-      url: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+      url: ${POSTGRES_URL}
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
   flyway:
