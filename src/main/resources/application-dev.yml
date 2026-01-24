@@ -4,7 +4,7 @@ quarkus:
   datasource:
     db-kind: postgresql
     jdbc:
-      url: ${POSTGRES_URL}
+      url: jdbc:postgresql://localhost:5432/musiccollection
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
   flyway:
