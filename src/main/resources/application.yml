@@ -15,10 +15,11 @@ quarkus:
         value: 10
   container-image:
     build: true
-    push: false
-    registry: localhost:32000
-    group: musiccollection
-    name: app
-    tag: 7.2.0
+    push: true
+    registry: ghcr.io
+    group: ${GITHUB_OWNER}
+    name: musiccollection
+    tag: ${RELEASE_TAG}
+    additional-tags: latest
     username: ${GITHUB_OWNER}
     password: ${GITHUB_TOKEN}
