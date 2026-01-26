@@ -1,5 +1,5 @@
 services:
-  postgres:
+  musiccollection-postgres:
     image: postgres:17.4
     container_name: musiccollection-postgres
     env_file: kustomize/base/secrets/postgres.env
@@ -10,7 +10,7 @@ services:
     networks:
       - musiccollection
 
-  postgres-keycloak:
+  musiccollection-postgres-keycloak:
     image: postgres:17.4
     container_name: musiccollection-postgres-keycloak
     env_file: kustomize/base/secrets/postgres-keycloak.env
@@ -21,7 +21,7 @@ services:
     networks:
       - musiccollection
 
-  keycloak:
+  musiccollection-keycloak:
     image: quay.io/keycloak/keycloak:26.5
     container_name: musiccollection-keycloak
     command: start-dev --import-realm
@@ -31,11 +31,11 @@ services:
     volumes:
       - ./keycloak:/opt/keycloak/data/import
     depends_on:
-      - postgres-keycloak
+      - musiccollection-postgres-keycloak
     networks:
       - musiccollection
 
-  minio:
+  musiccollection-minio:
     image: minio/minio:latest
     container_name: musiccollection-minio
     command: server --console-address ":9001" /data
@@ -48,7 +48,7 @@ services:
     networks:
       - musiccollection
 
-  app:
+  musiccollection-app:
     image: ghcr.io/alexanderboldt/musiccollection:7.1.0
     container_name: musiccollection-app
     env_file:
@@ -58,9 +58,9 @@ services:
     ports:
       - 4000:4000
     depends_on:
-      - postgres
-      - keycloak
-      - minio
+      - musiccollection-postgres
+      - musiccollection-keycloak
+      - musiccollection-minio
     networks:
       - musiccollection
 
@@ -72,4 +72,3 @@ volumes:
 networks:
   musiccollection:
     name: musiccollection
-    driver: bridge
