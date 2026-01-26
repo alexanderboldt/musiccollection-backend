@@ -1,24 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: musiccollection-keycloak
+spec:
+  selector:
+    app: musiccollection-keycloak
+  ports:
+    - port: 8080
+      targetPort: 8080
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: keycloak
+  name: musiccollection-keycloak
 spec:
   selector:
     matchLabels:
-      app: keycloak
+      app: musiccollection-keycloak
   replicas: 1
   template:
     metadata:
       labels:
-        app: keycloak
+        app: musiccollection-keycloak
     spec:
       containers:
-        - name: keycloak
+        - name: musiccollection-keycloak
           image: quay.io/keycloak/keycloak:26.5
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
-                name: keycloak-secret
+                name: musiccollection-keycloak-secret
           ports:
             - containerPort: 8080
           command:

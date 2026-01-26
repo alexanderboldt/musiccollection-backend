@@ -3,26 +3,24 @@ namespace: musiccollection
 resources:
   - namespace.yml
   - postgres/statefulset.yml
-  - postgres/service.yml
   - postgres-keycloak/statefulset.yml
-  - postgres-keycloak/service.yml
   - keycloak/deployment.yml
-  - keycloak/service.yml
   - minio/statefulset.yml
-  - minio/service.yml
   - musiccollection/deployment.yml
-  - musiccollection/service.yml
 
 secretGenerator:
-  - name: postgres-secret
+  - name: musiccollection-postgres-secret
     envs:
       - secrets/postgres.env
-  - name: postgres-keycloak-secret
+  - name: musiccollection-postgres-keycloak-secret
     envs:
       - secrets/postgres-keycloak.env
-  - name: keycloak-secret
+  - name: musiccollection-keycloak-secret
     envs:
       - secrets/keycloak.env
-  - name: minio-secret
+  - name: musiccollection-minio-secret
     envs:
       - secrets/minio.env
+  - name: musiccollection-app-secret
+    envs:
+      - secrets/musiccollection.env

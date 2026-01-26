@@ -1,33 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: musiccollection-postgres
+spec:
+  selector:
+    app: musiccollection-postgres
+  ports:
+    - port: 5432
+      targetPort: 5432
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: postgres
+  name: musiccollection-postgres
 spec:
   selector:
     matchLabels:
-      app: postgres
-  serviceName: postgres
+      app: musiccollection-postgres
+  serviceName: musiccollection-postgres
   replicas: 1
   template:
     metadata:
       labels:
-        app: postgres
+        app: musiccollection-postgres
     spec:
       containers:
-        - name: postgres
+        - name: musiccollection-postgres
           image: postgres:17.4
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
-                name: postgres-secret
+                name: musiccollection-postgres-secret
           ports:
             - containerPort: 5432
           volumeMounts:
-            - name: postgres-storage
+            - name: musiccollection-postgres-storage
               mountPath: /var/lib/postgresql/data
   volumeClaimTemplates:
     - metadata:
-        name: postgres-storage
+        name: musiccollection-postgres-storage
       spec:
         accessModes: [ "ReadWriteOnce" ]
         resources:
