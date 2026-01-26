@@ -49,7 +49,7 @@ services:
       - musiccollection
 
   musiccollection-app:
-    image: ghcr.io/alexanderboldt/musiccollection:7.1.0
+    image: ghcr.io/alexanderboldt/musiccollection:8.0.0
     container_name: musiccollection-app
     env_file:
       - kustomize/base/secrets/postgres.env

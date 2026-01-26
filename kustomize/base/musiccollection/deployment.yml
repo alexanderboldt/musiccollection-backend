@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: musiccollection-app
-          image: localhost:32000/musiccollection/app:7.2.0
+          image: ghcr.io/alexanderboldt/musiccollection:8.0.0
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
