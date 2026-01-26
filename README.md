@@ -1,8 +1,8 @@
-# Music Collection
+# :radio: Music Collection
 
 This is a backend application for managing the music-library like artists and albums.
 
-## Tech-Stack
+## :computer: Tech-Stack
 
 ### Development
 - Kotlin
@@ -25,13 +25,13 @@ This is a backend application for managing the music-library like artists and al
 ### CI/CD
 - GitHub Actions
 
-## Install with Docker
+## :whale: Install with Docker
 Create and start the containers:
 ```bash
 docker compose up -d
 ```
 
-## Install with Kubernetes
+## :wheel: Install with Kubernetes
 Install all objects with Kustomize:
 ```bash
 kubectl kube apply -k kustomize/base
@@ -42,6 +42,7 @@ Setup Keycloak:
 - import the realm
 - create a user with credentials
 - assign the realm role `user`
+- define a frontend-url for realm
 
 Delete the project namespace and all objects if not needed anymore:
 ```bash
