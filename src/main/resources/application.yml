@@ -5,8 +5,8 @@ quarkus:
   log:
     level: INFO
   hibernate-orm:
-    database:
-      generation: none
+    schema-management:
+      strategy: none
   fault-tolerance:
     global:
       rate-limit:
