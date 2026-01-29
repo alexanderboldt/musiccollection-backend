@@ -31,6 +31,12 @@ Create and start the containers:
 docker compose up -d
 ```
 
+Setup Keycloak:
+- log in into Keycloak
+- create a user with credentials
+- assign the realm role `user`
+- define a frontend-url for realm
+
 ## :wheel: Install with Kubernetes
 Install all objects with Kustomize:
 ```bash
