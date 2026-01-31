@@ -1,0 +1,26 @@
+meta {
+  name: Update
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{BASE_URL}}/v1/artists/:id
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 2
+}
+
+body:json {
+  {
+    "name": "The Who"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
