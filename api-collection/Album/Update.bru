@@ -1,0 +1,29 @@
+meta {
+  name: Update
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{BASE_URL}}/v1/albums/:id
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 1
+}
+
+body:json {
+  {
+    "artistId": "1",
+    "name": "Nevermind",
+    "year": 1999,
+    "tracks": 12
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
