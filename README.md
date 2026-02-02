@@ -40,7 +40,7 @@ Setup Keycloak:
 ## :wheel: Install with Kubernetes
 Install all objects with Kustomize:
 ```bash
-kubectl kube apply -k kustomize/base
+kubectl apply -k kustomize/base
 ```
 
 Setup Keycloak:
