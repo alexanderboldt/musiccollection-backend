@@ -2,7 +2,7 @@
 # development versions
 kotlin = "2.3.0"
 quarkus = "3.31.1"
-aws-s3 = "2.41.17"
+aws-s3 = "1.6.12"
 
 # test versions
 mockito-kotlin = "6.2.3"
@@ -29,7 +29,7 @@ quarkus-arc = { group = "io.quarkus", name = "quarkus-arc", version.ref = "quark
 quarkus-config-yaml = { group = "io.quarkus", name = "quarkus-config-yaml", version.ref = "quarkus" }
 quarkus-container-image-jib = { group = "io.quarkus", name = "quarkus-container-image-jib", version.ref = "quarkus" }
 
-aws-s3 = { group = "software.amazon.awssdk", name = "s3", version.ref = "aws-s3" }
+aws-s3 = { group = "aws.sdk.kotlin", name = "s3", version.ref = "aws-s3" }
 
 # test libraries
 quarkus-junit5 = { group = "io.quarkus", name = "quarkus-junit5", version.ref = "quarkus" }
