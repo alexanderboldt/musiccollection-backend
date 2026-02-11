@@ -5,8 +5,8 @@ quarkus:
     db-kind: postgresql
     jdbc:
       url: jdbc:postgresql://localhost:5432/musiccollection
-    username: ${POSTGRES_USER}
-    password: ${POSTGRES_PASSWORD}
+    username: admin
+    password: admin
   flyway:
     enabled: true
     migrate-at-start: true
@@ -23,5 +23,5 @@ quarkus:
       credentials:
         type: static
         static-provider:
-          access-key-id: ${MINIO_ROOT_USER}
-          secret-access-key: ${MINIO_ROOT_PASSWORD}
+          access-key-id: admin
+          secret-access-key: adminadmin
