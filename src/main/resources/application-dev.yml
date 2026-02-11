@@ -25,3 +25,7 @@ quarkus:
         static-provider:
           access-key-id: admin
           secret-access-key: adminadmin
+
+bucket:
+  artist: artist
+  album: album

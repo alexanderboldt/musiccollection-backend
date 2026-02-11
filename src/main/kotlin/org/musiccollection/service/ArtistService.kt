@@ -8,13 +8,15 @@ import org.musiccollection.repository.ArtistRepository
 import io.quarkus.panache.common.Sort
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.transaction.Transactional
+import org.eclipse.microprofile.config.inject.ConfigProperty
 import java.time.Instant
 
 @ApplicationScoped
 class ArtistService(
     private val s3Service: S3Service,
     private val userService: UserService,
-    private val artistRepository: ArtistRepository
+    private val artistRepository: ArtistRepository,
+    @param:ConfigProperty(name = "bucket.artist") private val bucket: String
 ) {
     // create
 
@@ -61,7 +63,7 @@ class ArtistService(
         val artistSaved = artistRepository.findOrThrow(id, userService.userId)
 
         // delete an existing image from the storage and the artist
-        artistSaved.filename?.also { s3Service.deleteFile(S3Bucket.ARTIST, it) }
+        artistSaved.filename?.also { s3Service.deleteFile(bucket, it) }
         artistRepository.deleteById(id)
     }
 }

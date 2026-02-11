@@ -6,6 +6,7 @@ import org.musiccollection.mapper.toDomain
 import org.musiccollection.repository.AlbumRepository
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.transaction.Transactional
+import org.eclipse.microprofile.config.inject.ConfigProperty
 import org.jboss.resteasy.reactive.multipart.FileUpload
 import java.io.InputStream
 import java.time.Instant
@@ -14,7 +15,8 @@ import java.time.Instant
 class AlbumImageService(
     private val s3Service: S3Service,
     private val userService: UserService,
-    private val albumRepository: AlbumRepository
+    private val albumRepository: AlbumRepository,
+    @param:ConfigProperty(name = "bucket.album") private val bucket: String
 ) {
 
     @Transactional
@@ -24,10 +26,10 @@ class AlbumImageService(
         if (image == null || image.uploadedFile() == null) throw BadRequestException()
 
         // 1. if there is already an image saved, delete it first
-        albumSaved.filename?.let { s3Service.deleteFile(S3Bucket.ALBUM, it) }
+        albumSaved.filename?.let { s3Service.deleteFile(bucket, it) }
 
         // 2. upload the new image and get the filename
-        val filename = s3Service.uploadFile(S3Bucket.ALBUM, image.uploadedFile(), image.fileName())
+        val filename = s3Service.uploadFile(bucket, image.uploadedFile(), image.fileName())
 
         // 3. update the album and return it
         return albumSaved
@@ -42,7 +44,7 @@ class AlbumImageService(
         val filename = albumRepository.findOrThrow(id, userService.userId).filename ?: throw BadRequestException()
 
         // download the file and return it with the filename
-        return s3Service.downloadFile(S3Bucket.ALBUM, filename) to filename
+        return s3Service.downloadFile(bucket, filename) to filename
     }
 
     @Transactional
@@ -52,7 +54,7 @@ class AlbumImageService(
         val filename = albumSaved.filename ?: throw BadRequestException()
 
         // delete the file
-        s3Service.deleteFile(S3Bucket.ALBUM, filename)
+        s3Service.deleteFile(bucket, filename)
 
         // update the album
         albumSaved.also {

@@ -25,3 +25,7 @@ quarkus:
         static-provider:
           access-key-id: ${MINIO_ROOT_USER}
           secret-access-key: ${MINIO_ROOT_PASSWORD}
+
+bucket:
+  artist: ${MINIO_BUCKET_ARTIST}
+  album: ${MINIO_BUCKET_ALBUM}

@@ -6,6 +6,7 @@ import org.musiccollection.mapper.toDomain
 import org.musiccollection.repository.ArtistRepository
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.transaction.Transactional
+import org.eclipse.microprofile.config.inject.ConfigProperty
 import org.jboss.resteasy.reactive.multipart.FileUpload
 import java.io.InputStream
 import java.time.Instant
@@ -14,7 +15,8 @@ import java.time.Instant
 class ArtistImageService(
     private val s3Service: S3Service,
     private val userService: UserService,
-    private val artistRepository: ArtistRepository
+    private val artistRepository: ArtistRepository,
+    @param:ConfigProperty(name = "bucket.artist") private val bucket: String
 ) {
 
     @Transactional
@@ -24,10 +26,10 @@ class ArtistImageService(
         if (image == null || image.uploadedFile() == null) throw BadRequestException()
 
         // 1. if there is already an image saved, delete it first
-        artistSaved.filename?.let { s3Service.deleteFile(S3Bucket.ARTIST, it) }
+        artistSaved.filename?.let { s3Service.deleteFile(bucket, it) }
 
         // 2. upload the new image and get the filename
-        val filename = s3Service.uploadFile(S3Bucket.ARTIST, image.uploadedFile(), image.fileName())
+        val filename = s3Service.uploadFile(bucket, image.uploadedFile(), image.fileName())
 
         // 3. update the artist and return it
         return artistSaved
@@ -42,7 +44,7 @@ class ArtistImageService(
         val filename = artistRepository.findOrThrow(id, userService.userId).filename ?: throw BadRequestException()
 
         // download the file and return it with the filename
-        return s3Service.downloadFile(S3Bucket.ARTIST, filename) to filename
+        return s3Service.downloadFile(bucket, filename) to filename
     }
 
     @Transactional
@@ -52,7 +54,7 @@ class ArtistImageService(
         val filename = artistSaved.filename ?: throw BadRequestException()
 
         // delete the file
-        s3Service.deleteFile(S3Bucket.ARTIST, filename)
+        s3Service.deleteFile(bucket, filename)
 
         // update the artist
         artistSaved.also {

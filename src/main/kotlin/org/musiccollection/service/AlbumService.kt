@@ -9,6 +9,7 @@ import org.musiccollection.repository.ArtistRepository
 import io.quarkus.panache.common.Sort
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.transaction.Transactional
+import org.eclipse.microprofile.config.inject.ConfigProperty
 import java.time.Instant
 
 @ApplicationScoped
@@ -16,7 +17,8 @@ class AlbumService(
     private val s3Service: S3Service,
     private val userService: UserService,
     private val albumRepository: AlbumRepository,
-    private val artistRepository: ArtistRepository
+    private val artistRepository: ArtistRepository,
+    @param:ConfigProperty(name = "bucket.album") private val bucket: String
 ) {
     // create
 
@@ -80,7 +82,7 @@ class AlbumService(
         val albumSaved = albumRepository.findOrThrow(id, userService.userId)
 
         // delete an existing image from the storage and the album
-        albumSaved.filename?.also { s3Service.deleteFile(S3Bucket.ALBUM, it) }
+        albumSaved.filename?.also { s3Service.deleteFile(bucket, it) }
         albumRepository.deleteById(id)
     }
 }
