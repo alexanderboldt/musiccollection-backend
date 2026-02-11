@@ -40,7 +40,8 @@ dependencies {
 
     implementation(libs.quarkus.container.image.jib)
 
-    implementation(libs.aws.s3)
+    implementation(libs.quarkus.aws.s3)
+    implementation(libs.aws.url.client)
 
     // test libraries
     testImplementation(libs.quarkus.junit5)
