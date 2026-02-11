@@ -2,42 +2,21 @@ package org.musiccollection.service
 
 import jakarta.annotation.PostConstruct
 import jakarta.enterprise.context.ApplicationScoped
-import org.eclipse.microprofile.config.inject.ConfigProperty
-import software.amazon.awssdk.auth.credentials.AwsBasicCredentials
-import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider
+import jakarta.inject.Inject
 import software.amazon.awssdk.core.sync.RequestBody
-import software.amazon.awssdk.regions.Region
 import software.amazon.awssdk.services.s3.S3Client
 import java.io.InputStream
-import java.net.URI
 import java.nio.file.Path
 import java.util.UUID
 
 /**
  * Manages the connection to the S3-storage.
- *
- * @param endpoint the endpoint as a [String] will be automatically injected from the configuration.
- * @param region the region as a [String] will be automatically injected from the configuration.
- * @param accessKey the access-key as a [String] will be automatically injected from the configuration.
- * @param secretKey the secret-key as a [String] will be automatically injected from the configuration.
  */
 @ApplicationScoped
-class S3Service(
-    @ConfigProperty(name = "quarkus.s3.endpoint-override") endpoint: String,
-    @ConfigProperty(name = "quarkus.s3.aws.region") region: String,
-    @ConfigProperty(name = "quarkus.s3.aws.credentials.static-provider.access-key-id") accessKey: String,
-    @ConfigProperty(name = "quarkus.s3.aws.credentials.static-provider.secret-access-key") secretKey: String
-) {
+class S3Service {
 
-    private val s3Client = S3Client.builder()
-        .endpointOverride(URI.create(endpoint))
-        .region(Region.of(region))
-        .forcePathStyle(true)
-        .credentialsProvider(
-            StaticCredentialsProvider.create(
-                AwsBasicCredentials.create(accessKey, secretKey)
-            )
-        ).build()
+    @Inject
+    private lateinit var s3Client: S3Client
 
     /**
      * Will be triggered after the creation of this class. All available buckets will be created in S3.
