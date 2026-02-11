@@ -3,7 +3,6 @@ package org.musiccollection.resource
 import org.musiccollection.Fixtures
 import org.musiccollection.domain.AlbumRequest
 import org.musiccollection.domain.ArtistResponse
-import org.musiccollection.service.S3Bucket
 import org.musiccollection.util.asAlbum
 import org.musiccollection.util.asAlbums
 import org.musiccollection.util.ALBUM_ID
@@ -282,7 +281,7 @@ class AlbumResourceTest : BaseResourceTest() {
 
         // try to download the image and verify, that it is deleted
         shouldThrow<NoSuchKeyException> {
-            s3Service.downloadFile(S3Bucket.ALBUM, albumCreated.filename!!)
+            s3Service.downloadFile("album", albumCreated.filename!!)
         }
     }
 

@@ -1,7 +1,6 @@
 package org.musiccollection.resource
 
 import org.musiccollection.Fixtures
-import org.musiccollection.service.S3Bucket
 import org.musiccollection.util.asArtist
 import org.musiccollection.util.asArtists
 import org.musiccollection.testresource.MinioTestResource
@@ -205,7 +204,7 @@ class ArtistResourceTest : BaseResourceTest() {
 
         // try to download the image and verify, that it is deleted
         shouldThrow<NoSuchKeyException> {
-            s3Service.downloadFile(S3Bucket.ARTIST, artistCreated.filename!!)
+            s3Service.downloadFile("artist", artistCreated.filename!!)
         }
     }
 

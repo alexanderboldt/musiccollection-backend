@@ -13,8 +13,14 @@ quarkus:
     enabled: true
     migrate-at-start: true
   s3:
+    devservices:
+      enabled: false
     path-style-access: true
     aws:
       region: eu-central-1
       credentials:
         type: static
+
+bucket:
+  artist: artist
+  album: album
