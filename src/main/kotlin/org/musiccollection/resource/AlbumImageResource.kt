@@ -10,6 +10,7 @@ import jakarta.ws.rs.POST
 import jakarta.ws.rs.Path
 import jakarta.ws.rs.PathParam
 import jakarta.ws.rs.Produces
+import jakarta.ws.rs.core.HttpHeaders
 import jakarta.ws.rs.core.MediaType
 import jakarta.ws.rs.core.Response
 import org.jboss.resteasy.reactive.RestForm
@@ -34,7 +35,11 @@ class AlbumImageResource(private val albumImageService: AlbumImageService) {
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     fun downloadImage(@PathParam(Resource.Param.ID) id: Long): Response {
         val (file, filename) = albumImageService.downloadImage(id)
-        return Answer.file(file, filename)
+
+        return Response
+            .ok(file)
+            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=$filename")
+            .build()
     }
 
     @DELETE

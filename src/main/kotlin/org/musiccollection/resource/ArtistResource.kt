@@ -15,6 +15,9 @@ import jakarta.ws.rs.PathParam
 import jakarta.ws.rs.Produces
 import jakarta.ws.rs.QueryParam
 import jakarta.ws.rs.core.MediaType
+import jakarta.ws.rs.core.Response
+import org.jboss.resteasy.reactive.ResponseStatus
+import org.jboss.resteasy.reactive.RestResponse
 
 @Suppress("unused")
 @Path(Resource.Path.ARTIST)
@@ -27,7 +30,8 @@ class ArtistResource(private val artistService: ArtistService) {
     // create
 
     @POST
-    fun create(artist: ArtistRequest) = Answer.created(artistService.create(artist))
+    @ResponseStatus(RestResponse.StatusCode.CREATED)
+    fun create(artist: ArtistRequest) = artistService.create(artist)
 
     // read
 

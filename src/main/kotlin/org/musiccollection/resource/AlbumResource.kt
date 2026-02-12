@@ -15,6 +15,8 @@ import jakarta.ws.rs.PathParam
 import jakarta.ws.rs.Produces
 import jakarta.ws.rs.QueryParam
 import jakarta.ws.rs.core.MediaType
+import org.jboss.resteasy.reactive.ResponseStatus
+import org.jboss.resteasy.reactive.RestResponse
 
 @Suppress("unused")
 @Path(Resource.Path.ALBUM)
@@ -27,7 +29,8 @@ class AlbumResource(private val albumService: AlbumService) {
     // create
 
     @POST
-    fun create(album: AlbumRequest) = Answer.created(albumService.create(album))
+    @ResponseStatus(RestResponse.StatusCode.CREATED)
+    fun create(album: AlbumRequest) = albumService.create(album)
 
     // read
 
