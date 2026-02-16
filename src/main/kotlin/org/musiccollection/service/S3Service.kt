@@ -18,6 +18,24 @@ class S3Service {
     private lateinit var s3Client: S3Client
 
     /**
+     * Creates the assigned bucket, if it doesn't exist yet.
+     * This function should be used in development- or test-mode.
+     * In production, the buckets should already exist.
+     *
+     * @param bucket the bucket to create as a [String].
+     */
+    fun createBucket(bucket: String) {
+        val bucketExists = s3Client
+            .listBuckets { it.build() }
+            .buckets()
+            .any { it.name() == bucket }
+
+        if (!bucketExists) {
+            s3Client.createBucket { it.bucket(bucket).build() }
+        }
+    }
+
+    /**
      * Uploads a file. The filename will be created with a random UUID and the extension from the assigned filename.
      * The final filename will be returned and should be used to associate the file.
      *

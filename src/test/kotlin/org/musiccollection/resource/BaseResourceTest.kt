@@ -35,6 +35,9 @@ abstract class BaseResourceTest {
         RestAssured.requestSpecification = RestAssured.given().contentType(ContentType.JSON)
 
         whenever(userService.userId).doReturn(Fixtures.User.USER_ID)
+
+        s3Service.createBucket("album")
+        s3Service.createBucket("artist")
     }
 
     @AfterEach
