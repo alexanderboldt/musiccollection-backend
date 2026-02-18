@@ -54,3 +54,6 @@ Delete the project namespace and all objects if not needed anymore:
 ```bash
 kubectl delete namespace musiccollection
 ```
+
+## :dog: Test with Bruno
+The folder `api-collection` contains the requests to test the app with Bruno.
