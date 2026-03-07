@@ -17,7 +17,7 @@ quarkus:
       principal-claim: sub
   s3:
     aws:
-      region: eu-central-1
+      region: ${S3_REGION}
 
 bucket:
   artist: ${BUCKET_ARTIST}
