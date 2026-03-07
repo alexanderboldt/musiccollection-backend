@@ -1,7 +1,7 @@
 locals {
   database = {
     name = "musiccollection"
-    username = "admin"
+    username = "adminadmin"
     password = "adminadmin"
     port = 5432
   }
@@ -12,7 +12,7 @@ locals {
 
   musiccollection_app = {
     name = "musiccollection-app"
-    image = "ghcr.io/alexanderboldt/musiccollection:8.0.0"
+    image = "ghcr.io/alexanderboldt/musiccollection:no-auth"
     port = 4000
   }
 }

@@ -23,11 +23,12 @@ resource "aws_ecs_task_definition" "app" {
         }
       ]
       environment = [
-        { name = "MYSQL_URL", value = "jdbc:postgresql://${aws_db_instance.postgres.endpoint}/${local.database.name}" },
-        { name = "MYSQL_USER", value = local.database.username },
-        { name = "MYSQL_PASSWORD", value = local.database.password },
-        { name = "S3_BUCKET", value = aws_s3_bucket.musiccollection_bucket.bucket },
+        { name = "POSTGRES_URL", value = "jdbc:postgresql://${aws_db_instance.postgres.endpoint}/${local.database.name}" },
+        { name = "POSTGRES_USER", value = local.database.username },
+        { name = "POSTGRES_PASSWORD", value = local.database.password },
         { name = "S3_REGION", value = local.s3.region },
+        { name = "BUCKET_ARTIST", value = aws_s3_bucket.musiccollection_bucket.bucket },
+        { name = "BUCKET_ALBUM", value = aws_s3_bucket.musiccollection_bucket.bucket }
       ]
     }
   ])
