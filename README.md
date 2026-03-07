@@ -55,5 +55,20 @@ Delete the project namespace and all objects if not needed anymore:
 kubectl delete namespace musiccollection
 ```
 
+## :cloud: Install with OpenTofu (Terraform)
+Make sure a connection to a cloud is available in the cli.
+
+Navigate to the `opentofu` directory and execute with these commands:
+```bash
+tofu init
+tofu plan
+tofu apply
+```
+
+Delete all resources if not needed anymore:
+```bash
+tofu destroy
+```
+
 ## :dog: Test with Bruno
 The folder `api-collection` contains the requests to test the app with Bruno.
