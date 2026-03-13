@@ -5,7 +5,11 @@ info:
 
 http:
   method: GET
-  url: "{{BASE_URL}}/v1/albums"
+  url: "{{BASE_URL}}/v1/albums?sort=id"
+  params:
+    - name: sort
+      value: id
+      type: query
   auth: inherit
 
 settings:
