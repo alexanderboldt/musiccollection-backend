@@ -3,11 +3,13 @@ kind: Service
 metadata:
   name: musiccollection-keycloak
 spec:
+  type: NodePort
   selector:
     app: musiccollection-keycloak
   ports:
     - port: 8080
       targetPort: 8080
+      nodePort: 30010
 ---
 apiVersion: apps/v1
 kind: Deployment
