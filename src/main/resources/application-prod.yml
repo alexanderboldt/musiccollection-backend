@@ -11,8 +11,12 @@ quarkus:
     enabled: true
     migrate-at-start: true
   oidc:
-    auth-server-url: ${KC_URL}
+    auth-server-url: ${AUTH_SERVER_URL}
+    client-id: ${AUTH_CLIENT_ID}
     application-type: service
+    roles:
+      source: accesstoken
+      claim: cognito:groups
     token:
       principal-claim: sub
   s3:
