@@ -26,6 +26,8 @@ resource "aws_ecs_task_definition" "app" {
         { name = "POSTGRES_URL", value = "jdbc:postgresql://${aws_db_instance.postgres.endpoint}/${local.database.name}" },
         { name = "POSTGRES_USER", value = local.database.username },
         { name = "POSTGRES_PASSWORD", value = local.database.password },
+        { name = "AUTH_SERVER_URL", value = "https://cognito-idp.${local.s3.region}.amazonaws.com/${aws_cognito_user_pool.main.id}" },
+        { name = "AUTH_CLIENT_ID", value = aws_cognito_user_pool_client.client.id },
         { name = "S3_REGION", value = local.s3.region },
         { name = "BUCKET_ARTIST", value = aws_s3_bucket.musiccollection_bucket.bucket },
         { name = "BUCKET_ALBUM", value = aws_s3_bucket.musiccollection_bucket.bucket }
