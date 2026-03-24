@@ -50,6 +50,11 @@ Setup Keycloak:
 - assign the realm role `user`
 - define a frontend-url for realm
 
+Set the context to the project namespace:
+```bash
+kubectl config set-context --current -n musiccollection
+```
+
 Delete the project namespace and all objects if not needed anymore:
 ```bash
 kubectl delete namespace musiccollection
