@@ -1,4 +1,6 @@
 name: aws
 variables:
   - name: BASE_URL
-    value: http://54.93.234.69:4000/api
+    value: http://18.194.233.148:4000/api
+  - name: ACCESS_TOKEN
+    value: <token>
