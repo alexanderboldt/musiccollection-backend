@@ -13,10 +13,12 @@ quarkus:
   oidc:
     auth-server-url: ${AUTH_SERVER_URL}
     client-id: ${AUTH_CLIENT_ID}
+    credentials:
+      secret: ${AUTH_CLIENT_SECRET}
     application-type: service
     roles:
       source: accesstoken
-      claim: cognito:groups
+      role-claim-path: cognito:groups
     token:
       principal-claim: sub
   s3:
