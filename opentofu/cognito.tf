@@ -26,3 +26,12 @@ resource "aws_cognito_user_pool_domain" "domain" {
   domain       = "musiccollection-auth-domain"
   user_pool_id = aws_cognito_user_pool.main.id
 }
+
+output "cognito_client_id" {
+  value = aws_cognito_user_pool_client.client.id
+}
+
+output "cognito_client_secret" {
+  value     = aws_cognito_user_pool_client.client.client_secret
+  sensitive = true
+}
