@@ -1,7 +1,6 @@
 name: Build & push the native docker image
 
 on:
-  workflow_dispatch:
   release:
     types: [published]
 
@@ -28,4 +27,4 @@ jobs:
         env:
           GITHUB_OWNER: ${{ github.repository_owner }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RELEASE_TAG: native
+          RELEASE_TAG: ${{ github.ref_name }}-stage
