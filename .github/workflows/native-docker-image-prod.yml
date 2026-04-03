@@ -1,4 +1,4 @@
-name: Build & push the native docker image
+name: Native Docker Image Production
 
 on:
   release:
