@@ -11,8 +11,6 @@ quarkus:
     global:
       rate-limit:
         value: 50
-      window:
-        value: 10
   container-image:
     build: true
     push: true
