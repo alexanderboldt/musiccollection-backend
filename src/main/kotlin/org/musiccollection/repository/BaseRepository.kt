@@ -1,10 +1,10 @@
 package org.musiccollection.repository
 
 import org.musiccollection.util.BadRequestException
-import io.quarkus.hibernate.orm.panache.PanacheRepository
+import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepository
 import io.quarkus.panache.common.Sort
 
-interface BaseRepository<T> : PanacheRepository<T> {
+interface BaseRepository<T : Any> : PanacheRepository<T> {
 
     // create
 
