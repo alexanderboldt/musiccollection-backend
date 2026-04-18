@@ -32,6 +32,30 @@ class ArtistResourceTest : BaseResourceTest() {
     // region create
 
     @Test
+    fun `should not create an artist and throw bad-request with empty request`() {
+        // execute and verify
+        val artistResponse = Given {
+            body(Fixtures.Artist.empty)
+        } When {
+            post(Resource.Path.ARTIST)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
+    }
+
+    @Test
+    fun `should not create an artist and throw bad-request with blank request`() {
+        // execute and verify
+        val artistResponse = Given {
+            body(Fixtures.Artist.blank)
+        } When {
+            post(Resource.Path.ARTIST)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
+    }
+
+    @Test
     fun `should create an artist with valid request`() {
         // execute and verify
         val artistResponse = Given {
@@ -91,7 +115,20 @@ class ArtistResourceTest : BaseResourceTest() {
     // region read one
 
     @Test
-    fun `should throw bad-request with invalid id`() {
+    fun `should not return one artist and throw bad-request with negative id`() {
+        // precondition: create an artist
+        createArtist(Fixtures.Artist.korn)
+
+        // execute and verify
+        When {
+            get(Resource.Path.ARTIST_ID, -1)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
+    }
+
+    @Test
+    fun `should not return one artist and throw bad-request with invalid id`() {
         // precondition: create an artist
         createArtist(Fixtures.Artist.korn)
 
@@ -126,6 +163,21 @@ class ArtistResourceTest : BaseResourceTest() {
     // region update
 
     @Test
+    fun `should not update an artist and throw bad-request with negative id`() {
+        // precondition: create an artist
+        createArtist(Fixtures.Artist.korn)
+
+        // execute the update and verify
+        Given {
+            body(Fixtures.Artist.slipknot)
+        } When {
+            put(Resource.Path.ARTIST_ID, -1)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
+    }
+
+    @Test
     fun `should not update an artist and throw bad-request with invalid id`() {
         // precondition: create an artist
         createArtist(Fixtures.Artist.korn)
@@ -135,6 +187,36 @@ class ArtistResourceTest : BaseResourceTest() {
             body(Fixtures.Artist.slipknot)
         } When {
             put(Resource.Path.ARTIST_ID, 100)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
+    }
+
+    @Test
+    fun `should not update an artist and throw bad-request with empty request`() {
+        // precondition: create an artist
+        createArtist(Fixtures.Artist.korn)
+
+        // execute the update and verify
+        Given {
+            body(Fixtures.Artist.empty)
+        } When {
+            put(Resource.Path.ARTIST_ID, -1)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
+    }
+
+    @Test
+    fun `should not update an artist and throw bad-request with blank request`() {
+        // precondition: create an artist
+        createArtist(Fixtures.Artist.korn)
+
+        // execute the update and verify
+        Given {
+            body(Fixtures.Artist.blank)
+        } When {
+            put(Resource.Path.ARTIST_ID, -1)
         } Then {
             statusCode(HttpStatus.SC_BAD_REQUEST)
         }
@@ -163,6 +245,19 @@ class ArtistResourceTest : BaseResourceTest() {
     // endregion
 
     // region delete
+
+    @Test
+    fun `should not delete an artist and throw bad-request with negative id`() {
+        // precondition: create an artist
+        createArtist(Fixtures.Artist.korn)
+
+        // execute the delete and verify
+        When {
+            delete(Resource.Path.ARTIST_ID, -1)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
+    }
 
     @Test
     fun `should not delete an artist and throw bad-request with invalid id`() {

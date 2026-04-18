@@ -10,6 +10,8 @@ object Fixtures {
     }
 
     object Artist {
+        val empty = ArtistRequest("")
+        val blank = ArtistRequest(" ")
         val korn = ArtistRequest("Korn")
         val slipknot = ArtistRequest("Slipknot")
 
