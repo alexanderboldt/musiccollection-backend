@@ -26,6 +26,7 @@ dependencies {
     implementation(libs.quarkus.rest)
     implementation(libs.quarkus.rest.jackson)
     implementation(libs.quarkus.smallrye)
+    implementation(libs.quarkus.hibernate.validator)
 
     implementation(libs.quarkus.hibernate.orm.panache.kotlin)
     implementation(libs.quarkus.jdbc.postgresql)
