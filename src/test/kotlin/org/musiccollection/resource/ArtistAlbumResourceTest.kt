@@ -39,7 +39,16 @@ class ArtistAlbumResourceTest : BaseResourceTest() {
     // region read all
 
     @Test
-    fun `should return bad-request due invalid artist-id`() {
+    fun `should not return all albums and throw bad-request with negative artist-id`() {
+        When {
+            get(Resource.Path.ARTIST_ALBUM, -1)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
+    }
+
+    @Test
+    fun `should not return all albums and throw bad-request with invalid artist-id`() {
         When {
             get(Resource.Path.ARTIST_ALBUM, 10)
         } Then {
