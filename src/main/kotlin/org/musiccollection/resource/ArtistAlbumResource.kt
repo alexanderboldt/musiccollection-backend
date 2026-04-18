@@ -5,6 +5,7 @@ import org.musiccollection.service.ArtistAlbumService
 import org.musiccollection.util.convertToSort
 import io.smallrye.faulttolerance.api.RateLimit
 import jakarta.annotation.security.RolesAllowed
+import jakarta.validation.constraints.Positive
 import jakarta.ws.rs.Consumes
 import jakarta.ws.rs.GET
 import jakarta.ws.rs.Path
@@ -23,7 +24,7 @@ class ArtistAlbumResource(private val artistAlbumService: ArtistAlbumService) {
 
     @GET
     fun readAllAlbumsFromArtist(
-        @PathParam(Resource.Param.ID) artistId: Long,
+        @Positive @PathParam(Resource.Param.ID) artistId: Long,
         @QueryParam(Resource.Param.SORT) sort: String?
     ): List<AlbumResponse> {
         return artistAlbumService.readAll(artistId, sort.convertToSort())
