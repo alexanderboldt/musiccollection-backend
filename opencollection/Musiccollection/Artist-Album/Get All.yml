@@ -5,10 +5,13 @@ info:
 
 http:
   method: GET
-  url: "{{BASE_URL}}/v1/artists/:id/albums"
+  url: "{{BASE_URL}}/v1/artists/:id/albums?sort=year"
   params:
+    - name: sort
+      value: year
+      type: query
     - name: id
-      value: "1"
+      value: "9"
       type: path
   auth: inherit
 
