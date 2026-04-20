@@ -43,9 +43,21 @@ class AlbumImageResourceTest : BaseResourceTest() {
     // region upload image
 
     @Test
+    fun `should not upload an image and throw bad-request with negative id`() {
+        Given {
+            multiPart("image", Fixtures.image)
+            contentType(ContentType.MULTIPART)
+        } When {
+            post(Resource.Path.ALBUM_IMAGE, -1)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
+    }
+
+    @Test
     fun `should throw bad-request with invalid id`() {
         Given {
-            multiPart("file", Fixtures.image)
+            multiPart("image", Fixtures.image)
             contentType(ContentType.MULTIPART)
         } When {
             post(Resource.Path.ALBUM_IMAGE, 100)
@@ -75,6 +87,19 @@ class AlbumImageResourceTest : BaseResourceTest() {
     // endregion
 
     // region download image
+
+    @Test
+    fun `should not download an image and throw bad-request with negative id`() {
+        // precondition: upload an image
+        uploadAlbumImage(albumCreated.id)
+
+        When {
+            get(Resource.Path.ALBUM_IMAGE, -1)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+            contentType(ContentType.BINARY)
+        }
+    }
 
     @Test
     fun `should not download an image and throw bad-request with invalid id`() {
@@ -110,6 +135,18 @@ class AlbumImageResourceTest : BaseResourceTest() {
     // endregion
 
     // region delete image
+
+    @Test
+    fun `should not delete an image and throw bad-request with negative id`() {
+        // precondition: upload an image
+        uploadAlbumImage(albumCreated.id)
+
+        When {
+            delete(Resource.Path.ALBUM_IMAGE, -1)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
+    }
 
     @Test
     fun `should not delete an image and throw bad-request with invalid id`() {
