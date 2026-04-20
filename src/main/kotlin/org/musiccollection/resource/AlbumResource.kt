@@ -5,6 +5,8 @@ import org.musiccollection.service.AlbumService
 import org.musiccollection.util.convertToSort
 import io.smallrye.faulttolerance.api.RateLimit
 import jakarta.annotation.security.RolesAllowed
+import jakarta.validation.Valid
+import jakarta.validation.constraints.Positive
 import jakarta.ws.rs.Consumes
 import jakarta.ws.rs.DELETE
 import jakarta.ws.rs.GET
@@ -30,7 +32,7 @@ class AlbumResource(private val albumService: AlbumService) {
 
     @POST
     @ResponseStatus(RestResponse.StatusCode.CREATED)
-    fun create(album: AlbumRequest) = albumService.create(album)
+    fun create(@Valid album: AlbumRequest) = albumService.create(album)
 
     // read
 
@@ -39,13 +41,16 @@ class AlbumResource(private val albumService: AlbumService) {
 
     @GET
     @Path(Resource.Path.ID)
-    fun read(@PathParam(Resource.Param.ID) id: Long) = albumService.read(id)
+    fun read(@Positive @PathParam(Resource.Param.ID) id: Long) = albumService.read(id)
 
     // update
 
     @PUT
     @Path(Resource.Path.ID)
-    fun update(@PathParam(Resource.Param.ID) id: Long, album: AlbumRequest) = albumService.update(id, album)
+    fun update(
+        @Positive @PathParam(Resource.Param.ID) id: Long,
+        @Valid album: AlbumRequest
+    ) = albumService.update(id, album)
 
     // delete
 
@@ -55,5 +60,5 @@ class AlbumResource(private val albumService: AlbumService) {
 
     @DELETE
     @Path(Resource.Path.ID)
-    fun delete(@PathParam(Resource.Param.ID) id: Long) = albumService.delete(id)
+    fun delete(@Positive @PathParam(Resource.Param.ID) id: Long) = albumService.delete(id)
 }

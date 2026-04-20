@@ -1,12 +1,14 @@
 package org.musiccollection.domain
 
+import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.Positive
 import java.time.Instant
 
 data class AlbumRequest(
-    val artistId: Long,
-    val name: String,
-    val year: Int,
-    val tracks: Int
+    @field:Positive val artistId: Long,
+    @field:NotBlank val name: String,
+    @field:Positive val year: Int,
+    @field:Positive val tracks: Int
 )
 
 data class AlbumResponse(
