@@ -46,7 +46,62 @@ class AlbumResourceTest : BaseResourceTest() {
     // region create
 
     @Test
-    fun `should not create an album with invalid artist-id`() {
+    fun `should not create an album and throw bad-request with negative artist-id`() {
+        Given {
+            body(Fixtures.Album.issues.copy(artistId = -1))
+        } When {
+            post(Resource.Path.ALBUM)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
+    }
+
+    @Test
+    fun `should not create an album and throw bad-request with empty name`() {
+        Given {
+            body(Fixtures.Album.issues.copy(name = ""))
+        } When {
+            post(Resource.Path.ALBUM)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
+    }
+
+    @Test
+    fun `should not create an album and throw bad-request with blank name`() {
+        Given {
+            body(Fixtures.Album.issues.copy(name = " "))
+        } When {
+            post(Resource.Path.ALBUM)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
+    }
+
+    @Test
+    fun `should not create an album and throw bad-request with negative year`() {
+        Given {
+            body(Fixtures.Album.issues.copy(year = -200))
+        } When {
+            post(Resource.Path.ALBUM)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
+    }
+
+    @Test
+    fun `should not create an album and throw bad-request with negative tracks`() {
+        Given {
+            body(Fixtures.Album.issues.copy(tracks = -1))
+        } When {
+            post(Resource.Path.ALBUM)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
+    }
+
+    @Test
+    fun `should not create an album and throw bad-request with invalid artist-id`() {
         Given {
             body(Fixtures.Album.issues)
         } When {
@@ -129,6 +184,17 @@ class AlbumResourceTest : BaseResourceTest() {
     // region read one
 
     @Test
+    fun `should not return one album and throw bad-request with negative id`() {
+        createAlbum(Fixtures.Album.issuesWithArtistId)
+
+        When {
+            get(Resource.Path.ALBUM_ID, -1)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
+    }
+
+    @Test
     fun `should throw bad-request with invalid id`() {
         createAlbum(Fixtures.Album.issuesWithArtistId)
 
@@ -160,6 +226,19 @@ class AlbumResourceTest : BaseResourceTest() {
     // region update
 
     @Test
+    fun `should not update an album and throw bad-request with negative id`() {
+        createAlbum(Fixtures.Album.issuesWithArtistId)
+
+        Given {
+            body(Fixtures.Album.untouchables.copy(artistId = artistCreated.id))
+        } When {
+            put(Resource.Path.ALBUM_ID, -1)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
+    }
+
+    @Test
     fun `should not update an album and throw bad-request with invalid id`() {
         createAlbum(Fixtures.Album.issuesWithArtistId)
 
@@ -167,6 +246,71 @@ class AlbumResourceTest : BaseResourceTest() {
             body(Fixtures.Album.untouchables.copy(artistId = artistCreated.id))
         } When {
             put(Resource.Path.ALBUM_ID, 100)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
+    }
+
+    @Test
+    fun `should not update an album and throw bad-request with negative artist-id`() {
+        val albumCreated = createAlbum(Fixtures.Album.issuesWithArtistId)
+
+        Given {
+            body(Fixtures.Album.untouchables.copy(artistId = -1))
+        } When {
+            put(Resource.Path.ALBUM_ID, albumCreated.id)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
+    }
+
+    @Test
+    fun `should not update an album and throw bad-request with empty name`() {
+        val albumCreated = createAlbum(Fixtures.Album.issuesWithArtistId)
+
+        Given {
+            body(Fixtures.Album.untouchables.copy(artistId = artistCreated.id, name = ""))
+        } When {
+            put(Resource.Path.ALBUM_ID, albumCreated.id)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
+    }
+
+    @Test
+    fun `should not update an album and throw bad-request with blank name`() {
+        val albumCreated = createAlbum(Fixtures.Album.issuesWithArtistId)
+
+        Given {
+            body(Fixtures.Album.untouchables.copy(artistId = artistCreated.id, name = " "))
+        } When {
+            put(Resource.Path.ALBUM_ID, albumCreated.id)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
+    }
+
+    @Test
+    fun `should not update an album and throw bad-request with negative year`() {
+        val albumCreated = createAlbum(Fixtures.Album.issuesWithArtistId)
+
+        Given {
+            body(Fixtures.Album.untouchables.copy(artistId = artistCreated.id, year = -1))
+        } When {
+            put(Resource.Path.ALBUM_ID, albumCreated.id)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
+    }
+
+    @Test
+    fun `should not update an album and throw bad-request with negative tracks`() {
+        val albumCreated = createAlbum(Fixtures.Album.issuesWithArtistId)
+
+        Given {
+            body(Fixtures.Album.untouchables.copy(artistId = artistCreated.id, tracks = -1))
+        } When {
+            put(Resource.Path.ALBUM_ID, albumCreated.id)
         } Then {
             statusCode(HttpStatus.SC_BAD_REQUEST)
         }
@@ -245,6 +389,17 @@ class AlbumResourceTest : BaseResourceTest() {
 
         albums.shouldNotBeNull()
         albums shouldBe emptyList()
+    }
+
+    @Test
+    fun `should not delete an album and throw bad-request with negative id`() {
+        createAlbum(Fixtures.Album.issuesWithArtistId)
+
+        When {
+            delete(Resource.Path.ALBUM_ID, -1)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
     }
 
     @Test
