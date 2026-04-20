@@ -20,10 +20,9 @@ class ArtistImageService(
 ) {
 
     @Transactional
-    fun uploadImage(id: Long, image: FileUpload?): ArtistResponse {
-        // check if the artist and the image are existing
+    fun uploadImage(id: Long, image: FileUpload): ArtistResponse {
+        // check if the artist exists
         val artistSaved = artistRepository.findOrThrow(id, userService.userId)
-        if (image == null || image.uploadedFile() == null) throw BadRequestException()
 
         // 1. if there is already an image saved, delete it first
         artistSaved.filename?.let { s3Service.deleteFile(bucket, it) }
