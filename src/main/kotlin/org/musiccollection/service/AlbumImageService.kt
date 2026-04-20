@@ -20,10 +20,9 @@ class AlbumImageService(
 ) {
 
     @Transactional
-    fun uploadImage(id: Long, image: FileUpload?): AlbumResponse {
+    fun uploadImage(id: Long, image: FileUpload): AlbumResponse {
         // check if the album and the image are existing
         val albumSaved = albumRepository.findOrThrow(id, userService.userId)
-        if (image == null || image.uploadedFile() == null) throw BadRequestException()
 
         // 1. if there is already an image saved, delete it first
         albumSaved.filename?.let { s3Service.deleteFile(bucket, it) }

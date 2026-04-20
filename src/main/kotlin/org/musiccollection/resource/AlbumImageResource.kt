@@ -3,6 +3,8 @@ package org.musiccollection.resource
 import org.musiccollection.service.AlbumImageService
 import io.smallrye.faulttolerance.api.RateLimit
 import jakarta.annotation.security.RolesAllowed
+import jakarta.validation.constraints.NotNull
+import jakarta.validation.constraints.Positive
 import jakarta.ws.rs.Consumes
 import jakarta.ws.rs.DELETE
 import jakarta.ws.rs.GET
@@ -27,13 +29,13 @@ class AlbumImageResource(private val albumImageService: AlbumImageService) {
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     fun uploadImage(
-        @PathParam(Resource.Param.ID) id: Long,
-        @RestForm image: FileUpload?
+        @Positive @PathParam(Resource.Param.ID) id: Long,
+        @NotNull @RestForm image: FileUpload
     ) = albumImageService.uploadImage(id, image)
 
     @GET
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
-    fun downloadImage(@PathParam(Resource.Param.ID) id: Long): Response {
+    fun downloadImage(@Positive @PathParam(Resource.Param.ID) id: Long): Response {
         val (file, filename) = albumImageService.downloadImage(id)
 
         return Response
@@ -43,5 +45,5 @@ class AlbumImageResource(private val albumImageService: AlbumImageService) {
     }
 
     @DELETE
-    fun deleteImage(@PathParam(Resource.Param.ID) id: Long) = albumImageService.deleteImage(id)
+    fun deleteImage(@Positive @PathParam(Resource.Param.ID) id: Long) = albumImageService.deleteImage(id)
 }
