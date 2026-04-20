@@ -39,7 +39,19 @@ class ArtistImageResourceTest : BaseResourceTest() {
     // region upload image
 
     @Test
-    fun `should throw bad-request with invalid id`() {
+    fun `should not upload an image and throw bad-request with negative id`() {
+        Given {
+            multiPart("image", Fixtures.image)
+            contentType(ContentType.MULTIPART)
+        } When {
+            post(Resource.Path.ARTIST_IMAGE, -1)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
+    }
+
+    @Test
+    fun `should not upload an image and throw bad-request with invalid id`() {
         Given {
             multiPart("image", Fixtures.image)
             contentType(ContentType.MULTIPART)
@@ -51,7 +63,7 @@ class ArtistImageResourceTest : BaseResourceTest() {
     }
 
     @Test
-    fun `should upload image and return ok with valid id`() {
+    fun `should upload an image and return ok with valid id`() {
         val artistResponse = Given {
             multiPart("image", Fixtures.image)
             contentType(ContentType.MULTIPART)
@@ -71,6 +83,19 @@ class ArtistImageResourceTest : BaseResourceTest() {
     // endregion
 
     // region download image
+
+    @Test
+    fun `should not download an image and throw bad-request with negative id`() {
+        // precondition: upload an image
+        uploadArtistImage(artistCreated.id)
+
+        When {
+            get(Resource.Path.ARTIST_IMAGE, -1)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+            contentType(ContentType.BINARY)
+        }
+    }
 
     @Test
     fun `should not download an image and throw bad-request with invalid id`() {
@@ -106,6 +131,18 @@ class ArtistImageResourceTest : BaseResourceTest() {
     // endregion
 
     // region delete image
+
+    @Test
+    fun `should not delete an image and throw bad-request with negative id`() {
+        // precondition: upload an image
+        uploadArtistImage(artistCreated.id)
+
+        When {
+            delete(Resource.Path.ARTIST_IMAGE, -1)
+        } Then {
+            statusCode(HttpStatus.SC_BAD_REQUEST)
+        }
+    }
 
     @Test
     fun `should not delete an image and throw bad-request with invalid id`() {
