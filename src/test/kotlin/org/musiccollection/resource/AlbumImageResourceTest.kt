@@ -55,7 +55,7 @@ class AlbumImageResourceTest : BaseResourceTest() {
     }
 
     @Test
-    fun `should throw bad-request with invalid id`() {
+    fun `should not upload an image and throw bad-request with invalid id`() {
         Given {
             multiPart("image", Fixtures.image)
             contentType(ContentType.MULTIPART)
@@ -67,7 +67,7 @@ class AlbumImageResourceTest : BaseResourceTest() {
     }
 
     @Test
-    fun `should upload image and return ok with valid id`() {
+    fun `should upload image with valid id`() {
         val albumResponse = Given {
             multiPart("image", Fixtures.image)
             contentType(ContentType.MULTIPART)
@@ -115,7 +115,7 @@ class AlbumImageResourceTest : BaseResourceTest() {
     }
 
     @Test
-    fun `should download an image and with valid id`() {
+    fun `should download an image with valid id`() {
         // precondition: upload an image
         uploadAlbumImage(albumCreated.id)
 
@@ -161,7 +161,7 @@ class AlbumImageResourceTest : BaseResourceTest() {
     }
 
     @Test
-    fun `should not delete an image and with non existing image`() {
+    fun `should not delete an image and throw bad-request with non existing image`() {
         When {
             delete(Resource.Path.ALBUM_IMAGE, albumCreated.id)
         } Then {
@@ -170,7 +170,7 @@ class AlbumImageResourceTest : BaseResourceTest() {
     }
 
     @Test
-    fun `should delete an image and with valid id and existing image`() {
+    fun `should delete an image with valid id and existing image`() {
         // precondition: upload an image
         uploadAlbumImage(albumCreated.id)
 

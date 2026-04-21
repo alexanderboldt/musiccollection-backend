@@ -132,7 +132,7 @@ class AlbumResourceTest : BaseResourceTest() {
     // region read all
 
     @Test
-    fun `should return an empty list`() {
+    fun `should read an empty list`() {
         val albumResponse = When {
             get(Resource.Path.ALBUM)
         } Then {
@@ -146,7 +146,7 @@ class AlbumResourceTest : BaseResourceTest() {
     }
 
     @Test
-    fun `should return a list with one album`() {
+    fun `should read a list with one album`() {
         createAlbum(Fixtures.Album.issuesWithArtistId)
 
         val albums = When {
@@ -162,7 +162,7 @@ class AlbumResourceTest : BaseResourceTest() {
     }
 
     @Test
-    fun `should return a list with ten albums`() {
+    fun `should read a list with ten albums`() {
         val albumsRequest = (1..10).map { Fixtures.Album.issuesWithArtistId }
 
         albumsRequest.forEach { createAlbum(it) }
@@ -184,7 +184,7 @@ class AlbumResourceTest : BaseResourceTest() {
     // region read one
 
     @Test
-    fun `should not return one album and throw bad-request with negative id`() {
+    fun `should not read one album and throw bad-request with negative id`() {
         createAlbum(Fixtures.Album.issuesWithArtistId)
 
         When {
@@ -195,7 +195,7 @@ class AlbumResourceTest : BaseResourceTest() {
     }
 
     @Test
-    fun `should throw bad-request with invalid id`() {
+    fun `should not read one album and throw bad-request with invalid id`() {
         createAlbum(Fixtures.Album.issuesWithArtistId)
 
         When {
@@ -206,7 +206,7 @@ class AlbumResourceTest : BaseResourceTest() {
     }
 
     @Test
-    fun `should return one album with valid id`() {
+    fun `should read one album with valid id`() {
         val albumCreated = createAlbum(Fixtures.Album.issuesWithArtistId)
 
         val albumResponse = When {
@@ -330,7 +330,7 @@ class AlbumResourceTest : BaseResourceTest() {
     }
 
     @Test
-    fun `should update and return an album with valid id`() {
+    fun `should update an album with valid id`() {
         val albumCreated = createAlbum(Fixtures.Album.issuesWithArtistId)
         val albumUpdate = Fixtures.Album.untouchables.copy(artistId = artistCreated.id)
 

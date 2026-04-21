@@ -63,7 +63,7 @@ class ArtistImageResourceTest : BaseResourceTest() {
     }
 
     @Test
-    fun `should upload an image and return ok with valid id`() {
+    fun `should upload an image with valid id`() {
         val artistResponse = Given {
             multiPart("image", Fixtures.image)
             contentType(ContentType.MULTIPART)
@@ -111,7 +111,7 @@ class ArtistImageResourceTest : BaseResourceTest() {
     }
 
     @Test
-    fun `should download an image and with valid id`() {
+    fun `should download an image with valid id`() {
         // precondition: upload an image
         uploadArtistImage(artistCreated.id)
 
@@ -157,7 +157,7 @@ class ArtistImageResourceTest : BaseResourceTest() {
     }
 
     @Test
-    fun `should not delete an image and with non existing image`() {
+    fun `should not delete an image and throw bad-request with non existing image`() {
         When {
             delete(Resource.Path.ARTIST_IMAGE, artistCreated.id)
         } Then {
@@ -166,7 +166,7 @@ class ArtistImageResourceTest : BaseResourceTest() {
     }
 
     @Test
-    fun `should delete an image and with valid id and existing image`() {
+    fun `should delete an image with valid id and existing image`() {
         // precondition: upload an image
         uploadArtistImage(artistCreated.id)
 

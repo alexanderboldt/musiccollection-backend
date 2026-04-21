@@ -77,7 +77,7 @@ class ArtistResourceTest : BaseResourceTest() {
     // region read all
 
     @Test
-    fun `should return an empty list`() {
+    fun `should read an empty list`() {
         // execute and verify
         val artistResponse = When {
             get(Resource.Path.ARTIST)
@@ -93,7 +93,7 @@ class ArtistResourceTest : BaseResourceTest() {
     }
 
     @Test
-    fun `should return a list with one artist`() {
+    fun `should read a list with one artist`() {
         // precondition: create an artist
         createArtist(Fixtures.Artist.korn)
 
@@ -115,7 +115,7 @@ class ArtistResourceTest : BaseResourceTest() {
     // region read one
 
     @Test
-    fun `should not return one artist and throw bad-request with negative id`() {
+    fun `should not read one artist and throw bad-request with negative id`() {
         // precondition: create an artist
         createArtist(Fixtures.Artist.korn)
 
@@ -128,7 +128,7 @@ class ArtistResourceTest : BaseResourceTest() {
     }
 
     @Test
-    fun `should not return one artist and throw bad-request with invalid id`() {
+    fun `should not read one artist and throw bad-request with invalid id`() {
         // precondition: create an artist
         createArtist(Fixtures.Artist.korn)
 
@@ -141,7 +141,7 @@ class ArtistResourceTest : BaseResourceTest() {
     }
 
     @Test
-    fun `should return one artist with valid id`() {
+    fun `should read one artist with valid id`() {
         // precondition: create an artist
         val artistCreated = createArtist(Fixtures.Artist.korn)
 
@@ -223,7 +223,7 @@ class ArtistResourceTest : BaseResourceTest() {
     }
 
     @Test
-    fun `should update and return an artist with valid id`() {
+    fun `should update an artist with valid id`() {
         // precondition: create an artist
         val artistCreated = createArtist(Fixtures.Artist.korn)
 

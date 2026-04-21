@@ -39,7 +39,7 @@ class ArtistAlbumResourceTest : BaseResourceTest() {
     // region read all
 
     @Test
-    fun `should not return all albums and throw bad-request with negative artist-id`() {
+    fun `should not read all albums and throw bad-request with negative artist-id`() {
         When {
             get(Resource.Path.ARTIST_ALBUM, -1)
         } Then {
@@ -48,7 +48,7 @@ class ArtistAlbumResourceTest : BaseResourceTest() {
     }
 
     @Test
-    fun `should not return all albums and throw bad-request with invalid artist-id`() {
+    fun `should not read all albums and throw bad-request with invalid artist-id`() {
         When {
             get(Resource.Path.ARTIST_ALBUM, 10)
         } Then {
@@ -57,7 +57,7 @@ class ArtistAlbumResourceTest : BaseResourceTest() {
     }
 
     @Test
-    fun `should return an empty list`() {
+    fun `should read an empty list`() {
         val albums = When {
             get(Resource.Path.ARTIST_ALBUM, artistCreated.id)
         } Then {
@@ -71,7 +71,7 @@ class ArtistAlbumResourceTest : BaseResourceTest() {
     }
 
     @Test
-    fun `should return a list with one album`() {
+    fun `should read a list with one album`() {
         createAlbum(Fixtures.Album.issuesWithArtistId)
 
         val albums = When {
@@ -87,7 +87,7 @@ class ArtistAlbumResourceTest : BaseResourceTest() {
     }
 
     @Test
-    fun `should return a list with ten albums`() {
+    fun `should read a list with ten albums`() {
         val albumsRequest = (1..10).map { Fixtures.Album.issuesWithArtistId }
 
         albumsRequest.forEach { createAlbum(it) }
