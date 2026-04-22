@@ -19,10 +19,12 @@ class AlbumImageService(
     @param:ConfigProperty(name = "bucket.album") private val bucket: String
 ) {
 
+    private fun getAlbum(id: Long) = albumRepository.findOrThrow(id, userService.userId)
+
     @Transactional
     fun uploadImage(id: Long, image: FileUpload): AlbumResponse {
-        // check if the album and the image are existing
-        val albumSaved = albumRepository.findOrThrow(id, userService.userId)
+        // check if the album exists
+        val albumSaved = getAlbum(id)
 
         // 1. if there is already an image saved, delete it first
         albumSaved.filename?.let { s3Service.deleteFile(bucket, it) }
@@ -40,7 +42,7 @@ class AlbumImageService(
 
     fun downloadImage(id: Long): Pair<InputStream, String> {
         // check if the album and image are existing
-        val filename = albumRepository.findOrThrow(id, userService.userId).filename ?: throw BadRequestException()
+        val filename = getAlbum(id).filename ?: throw BadRequestException()
 
         // download the file and return it with the filename
         return s3Service.downloadFile(bucket, filename) to filename
@@ -49,7 +51,7 @@ class AlbumImageService(
     @Transactional
     fun deleteImage(id: Long) {
         // check if the album and image are existing
-        val albumSaved = albumRepository.findOrThrow(id, userService.userId)
+        val albumSaved = getAlbum(id)
         val filename = albumSaved.filename ?: throw BadRequestException()
 
         // delete the file

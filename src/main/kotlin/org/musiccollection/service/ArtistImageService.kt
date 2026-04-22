@@ -19,10 +19,12 @@ class ArtistImageService(
     @param:ConfigProperty(name = "bucket.artist") private val bucket: String
 ) {
 
+    private fun getArtist(id: Long) = artistRepository.findOrThrow(id, userService.userId)
+
     @Transactional
     fun uploadImage(id: Long, image: FileUpload): ArtistResponse {
         // check if the artist exists
-        val artistSaved = artistRepository.findOrThrow(id, userService.userId)
+        val artistSaved = getArtist(id)
 
         // 1. if there is already an image saved, delete it first
         artistSaved.filename?.let { s3Service.deleteFile(bucket, it) }
@@ -40,7 +42,7 @@ class ArtistImageService(
 
     fun downloadImage(id: Long): Pair<InputStream, String> {
         // check if the artist and image are existing
-        val filename = artistRepository.findOrThrow(id, userService.userId).filename ?: throw BadRequestException()
+        val filename = getArtist(id).filename ?: throw BadRequestException()
 
         // download the file and return it with the filename
         return s3Service.downloadFile(bucket, filename) to filename
@@ -49,7 +51,7 @@ class ArtistImageService(
     @Transactional
     fun deleteImage(id: Long) {
         // check if the artist and image are existing
-        val artistSaved = artistRepository.findOrThrow(id, userService.userId)
+        val artistSaved = getArtist(id)
         val filename = artistSaved.filename ?: throw BadRequestException()
 
         // delete the file
