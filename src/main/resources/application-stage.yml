@@ -1,4 +1,9 @@
 quarkus:
+  http:
+    cors:
+      enabled: true
+      origins: /.*/
+      methods: GET,PUT,POST,DELETE
   devservices:
     enabled: false
   datasource:
