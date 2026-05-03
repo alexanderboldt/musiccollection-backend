@@ -16,7 +16,7 @@ quarkus:
     push: true
     registry: ghcr.io
     group: ${GITHUB_OWNER}
-    name: musiccollection
+    name: musiccollection-backend
     tag: ${RELEASE_TAG}
     additional-tags: latest
     username: ${GITHUB_OWNER}
