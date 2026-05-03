@@ -48,9 +48,9 @@ services:
     networks:
       - musiccollection
 
-  musiccollection-app:
-    image: ghcr.io/alexanderboldt/musiccollection:10.0.0-stage
-    container_name: musiccollection-app
+  musiccollection-backend:
+    image: ghcr.io/alexanderboldt/musiccollection:10.2.0-stage
+    container_name: musiccollection-backend
     env_file:
       - kustomize/base/secrets/postgres.env
       - kustomize/base/secrets/minio.env
