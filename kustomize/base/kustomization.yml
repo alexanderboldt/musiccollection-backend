@@ -21,6 +21,6 @@ secretGenerator:
   - name: musiccollection-minio-secret
     envs:
       - secrets/minio.env
-  - name: musiccollection-app-secret
+  - name: musiccollection-backend-secret
     envs:
       - secrets/musiccollection.env
