@@ -19,6 +19,7 @@ quarkus:
     auth-server-url: ${KC_URL}
     application-type: service
     token:
+      issuer: any
       principal-claim: sub
   s3:
     endpoint-override: ${MINIO_URL}

@@ -19,6 +19,7 @@ quarkus:
     auth-server-url: http://localhost:8080/realms/musiccollection
     application-type: service
     token:
+      issuer: any
       principal-claim: sub
   s3:
     endpoint-override: http://localhost:9000
