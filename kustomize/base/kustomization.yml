@@ -6,7 +6,8 @@ resources:
   - postgres-keycloak/statefulset.yml
   - keycloak/deployment.yml
   - minio/statefulset.yml
-  - musiccollection/deployment.yml
+  - musiccollection/deployment-backend.yml
+  - musiccollection/deployment-frontend.yml
 
 secretGenerator:
   - name: musiccollection-postgres-secret
