@@ -22,15 +22,15 @@ quarkus:
       issuer: any
       principal-claim: sub
   s3:
-    endpoint-override: ${MINIO_URL}
+    endpoint-override: ${S3_URL}
     path-style-access: true
     aws:
       region: eu-central-1
       credentials:
         type: static
         static-provider:
-          access-key-id: ${MINIO_ROOT_USER}
-          secret-access-key: ${MINIO_ROOT_PASSWORD}
+          access-key-id: ${S3_ACCESS_KEY}
+          secret-access-key: ${S3_SECRET_KEY}
 
 bucket:
   artist: ${BUCKET_ARTIST}

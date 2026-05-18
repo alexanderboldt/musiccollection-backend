@@ -30,7 +30,7 @@ quarkus:
         type: static
         static-provider:
           access-key-id: admin
-          secret-access-key: adminadmin
+          secret-access-key: admin
 
 bucket:
   artist: artist
