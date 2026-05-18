@@ -48,7 +48,7 @@ services:
       - musiccollection
 
   musiccollection-backend:
-    image: ghcr.io/alexanderboldt/musiccollection-backend:10.2.0-stage
+    image: ghcr.io/alexanderboldt/musiccollection-backend:10.3.0-stage
     container_name: musiccollection-backend
     env_file:
       - kustomize/base/secrets/postgres.env

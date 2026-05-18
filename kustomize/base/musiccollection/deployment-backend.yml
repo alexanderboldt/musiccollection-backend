@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: musiccollection-backend
-          image: ghcr.io/alexanderboldt/musiccollection-backend:10.2.0-stage
+          image: ghcr.io/alexanderboldt/musiccollection-backend:10.3.0-stage
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
