@@ -33,8 +33,6 @@ spec:
             - secretRef:
                 name: musiccollection-postgres-secret
             - secretRef:
-                name: musiccollection-minio-secret
-            - secretRef:
                 name: musiccollection-backend-secret
           ports:
             - containerPort: 4000

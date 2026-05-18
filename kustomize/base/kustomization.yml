@@ -5,7 +5,7 @@ resources:
   - postgres/statefulset.yml
   - postgres-keycloak/statefulset.yml
   - keycloak/deployment.yml
-  - minio/statefulset.yml
+  - rustfs/statefulset.yml
   - musiccollection/deployment-backend.yml
   - musiccollection/deployment-frontend.yml
 
@@ -19,9 +19,9 @@ secretGenerator:
   - name: musiccollection-keycloak-secret
     envs:
       - secrets/keycloak.env
-  - name: musiccollection-minio-secret
+  - name: musiccollection-rustfs-secret
     envs:
-      - secrets/minio.env
+      - secrets/rustfs.env
   - name: musiccollection-backend-secret
     envs:
       - secrets/musiccollection.env

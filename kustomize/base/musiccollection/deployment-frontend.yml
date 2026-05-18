@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: musiccollection-frontend
-          image: ghcr.io/alexanderboldt/musiccollection-frontend:0.3.1-staging
+          image: ghcr.io/alexanderboldt/musiccollection-frontend:2.0.0-staging
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 4200
