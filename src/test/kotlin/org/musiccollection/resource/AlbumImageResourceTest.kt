@@ -4,7 +4,6 @@ import org.musiccollection.Fixtures
 import org.musiccollection.domain.AlbumResponse
 import org.musiccollection.domain.ArtistResponse
 import org.musiccollection.util.asAlbum
-import org.musiccollection.testresource.MinioTestResource
 import org.musiccollection.util.createAlbum
 import org.musiccollection.util.createArtist
 import org.musiccollection.util.uploadAlbumImage
@@ -23,9 +22,10 @@ import jakarta.transaction.Transactional
 import org.apache.http.HttpStatus
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.musiccollection.testresource.RustFsTestResource
 
 @QuarkusTest
-@QuarkusTestResource(MinioTestResource::class)
+@QuarkusTestResource(RustFsTestResource::class)
 @TestSecurity(user = "user", roles = [Role.USER])
 class AlbumImageResourceTest : BaseResourceTest() {
 

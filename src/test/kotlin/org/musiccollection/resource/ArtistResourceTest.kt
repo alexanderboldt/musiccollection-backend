@@ -3,7 +3,6 @@ package org.musiccollection.resource
 import org.musiccollection.Fixtures
 import org.musiccollection.util.asArtist
 import org.musiccollection.util.asArtists
-import org.musiccollection.testresource.MinioTestResource
 import org.musiccollection.util.ARTIST_ID
 import org.musiccollection.util.createArtist
 import org.musiccollection.util.shouldBeArtist
@@ -22,10 +21,11 @@ import io.restassured.module.kotlin.extensions.When
 import org.apache.http.HttpStatus
 import org.hamcrest.CoreMatchers.equalTo
 import org.junit.jupiter.api.Test
+import org.musiccollection.testresource.RustFsTestResource
 import software.amazon.awssdk.services.s3.model.NoSuchKeyException
 
 @QuarkusTest
-@QuarkusTestResource(MinioTestResource::class)
+@QuarkusTestResource(RustFsTestResource::class)
 @TestSecurity(user = "user", roles = [Role.USER])
 class ArtistResourceTest : BaseResourceTest() {
 

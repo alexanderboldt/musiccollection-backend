@@ -3,7 +3,6 @@ package org.musiccollection.resource
 import org.musiccollection.Fixtures
 import org.musiccollection.domain.ArtistResponse
 import org.musiccollection.util.asArtist
-import org.musiccollection.testresource.MinioTestResource
 import org.musiccollection.util.createArtist
 import org.musiccollection.util.uploadArtistImage
 import io.kotest.matchers.comparables.shouldBeGreaterThan
@@ -21,9 +20,10 @@ import jakarta.transaction.Transactional
 import org.apache.http.HttpStatus
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.musiccollection.testresource.RustFsTestResource
 
 @QuarkusTest
-@QuarkusTestResource(MinioTestResource::class)
+@QuarkusTestResource(RustFsTestResource::class)
 @TestSecurity(user = "user", roles = [Role.USER])
 class ArtistImageResourceTest : BaseResourceTest() {
 
