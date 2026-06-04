@@ -2,7 +2,7 @@
 # development versions
 kotlin = "2.4.0"
 quarkus = "3.34.3"
-aws-s3 = "3.16.0"
+aws-s3 = "3.19.0"
 amazon-awssdk = "2.42.31"
 
 # test versions
