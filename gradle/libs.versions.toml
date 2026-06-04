@@ -1,7 +1,7 @@
 [versions]
 # development versions
 kotlin = "2.4.0"
-quarkus = "3.34.3"
+quarkus = "3.36.1"
 aws-s3 = "3.19.0"
 amazon-awssdk = "2.46.3"
 
