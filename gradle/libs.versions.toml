@@ -9,7 +9,7 @@ amazon-awssdk = "2.46.3"
 mockito-kotlin = "6.3.0"
 kotest = "6.1.5"
 rest-assured = "6.0.0"
-testcontainer = "2.0.3"
+testcontainer = "2.0.5"
 
 [libraries]
 # development libraries
