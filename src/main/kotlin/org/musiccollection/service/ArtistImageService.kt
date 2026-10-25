@@ -1,13 +1,12 @@
 package org.musiccollection.service
 
-import org.musiccollection.domain.ArtistResponse
 import org.musiccollection.util.BadRequestException
-import org.musiccollection.mapper.toDomain
 import org.musiccollection.repository.ArtistRepository
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.transaction.Transactional
 import org.eclipse.microprofile.config.inject.ConfigProperty
 import org.jboss.resteasy.reactive.multipart.FileUpload
+import org.musiccollection.entity.ArtistEntity
 import java.io.InputStream
 import java.time.Instant
 
@@ -22,7 +21,7 @@ class ArtistImageService(
     private fun getArtist(id: Long) = artistRepository.findOrThrow(id, userService.userId)
 
     @Transactional
-    fun uploadImage(id: Long, image: FileUpload): ArtistResponse {
+    fun uploadImage(id: Long, image: FileUpload): ArtistEntity {
         // check if the artist exists
         val artistSaved = getArtist(id)
 
@@ -37,7 +36,7 @@ class ArtistImageService(
             .also {
                 it.filename = filename
                 it.updatedAt = Instant.now()
-            }.toDomain()
+            }
     }
 
     fun downloadImage(id: Long): Pair<InputStream, String> {

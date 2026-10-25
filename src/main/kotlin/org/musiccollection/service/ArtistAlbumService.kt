@@ -1,12 +1,11 @@
 package org.musiccollection.service
 
-import org.musiccollection.domain.AlbumResponse
-import org.musiccollection.mapper.toDomain
 import org.musiccollection.repository.AlbumRepository
 import org.musiccollection.repository.ArtistRepository
 import io.quarkus.panache.common.Sort
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.transaction.Transactional
+import org.musiccollection.entity.AlbumEntity
 
 @ApplicationScoped
 class ArtistAlbumService(
@@ -16,11 +15,9 @@ class ArtistAlbumService(
 ) {
 
     @Transactional
-    fun readAll(artistId: Long, sort: Sort): List<AlbumResponse> {
+    fun readAll(artistId: Long, sort: Sort): List<AlbumEntity> {
         artistRepository.existsOrThrow(artistId, userService.userId)
 
-        return albumRepository
-            .findByArtistId(userService.userId, artistId, sort)
-            .map { it.toDomain() }
+        return albumRepository.findByArtistId(userService.userId, artistId, sort)
     }
 }

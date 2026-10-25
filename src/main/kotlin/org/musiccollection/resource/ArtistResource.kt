@@ -20,6 +20,7 @@ import jakarta.ws.rs.QueryParam
 import jakarta.ws.rs.core.MediaType
 import org.jboss.resteasy.reactive.ResponseStatus
 import org.jboss.resteasy.reactive.RestResponse
+import org.musiccollection.domain.ArtistResponse
 
 @Suppress("unused")
 @Path(Resource.Path.ARTIST)
@@ -33,16 +34,22 @@ class ArtistResource(private val artistService: ArtistService) {
 
     @POST
     @ResponseStatus(RestResponse.StatusCode.CREATED)
-    fun create(@Valid artist: ArtistRequest) = artistService.create(artist)
+    fun create(@Valid artist: ArtistRequest): ArtistResponse = artistService
+        .create(artist)
+        .toDomain()
 
     // read
 
     @GET
-    fun readAll(@QueryParam(Resource.Param.SORT) sort: String?) = artistService.readAll(sort.convertToSort())
+    fun readAll(@QueryParam(Resource.Param.SORT) sort: String?): List<ArtistResponse> = artistService
+        .readAll(sort.convertToSort())
+        .map { it.toDomain() }
 
     @GET
     @Path(Resource.Path.ID)
-    fun read(@Positive @PathParam(Resource.Param.ID) id: Long) = artistService.read(id)
+    fun read(@Positive @PathParam(Resource.Param.ID) id: Long): ArtistResponse = artistService
+        .read(id)
+        .toDomain()
 
     // update
 
@@ -51,7 +58,9 @@ class ArtistResource(private val artistService: ArtistService) {
     fun update(
         @Positive @PathParam(Resource.Param.ID) id: Long,
         @Valid artist: ArtistRequest
-    ) = artistService.update(id, artist)
+    ): ArtistResponse = artistService
+        .update(id, artist)
+        .toDomain()
 
     // delete
 

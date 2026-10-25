@@ -1,8 +1,6 @@
 package org.musiccollection.service
 
-import org.musiccollection.domain.ArtistResponse
 import org.musiccollection.domain.ArtistRequest
-import org.musiccollection.mapper.toDomain
 import org.musiccollection.entity.ArtistEntity
 import org.musiccollection.repository.ArtistRepository
 import io.quarkus.panache.common.Sort
@@ -21,7 +19,7 @@ class ArtistService(
     // create
 
     @Transactional
-    fun create(artist: ArtistRequest): ArtistResponse {
+    fun create(artist: ArtistRequest): ArtistEntity {
         val entity = ArtistEntity(
             0,
             userService.userId,
@@ -31,30 +29,26 @@ class ArtistService(
             Instant.now()
         )
 
-        return artistRepository.save(entity).toDomain()
+        return artistRepository.save(entity)
     }
 
     // read
 
     @Transactional
-    fun readAll(sort: Sort) = artistRepository
-        .findAll(userService.userId, sort)
-        .map { it.toDomain() }
+    fun readAll(sort: Sort) = artistRepository.findAll(userService.userId, sort)
 
     @Transactional
-    fun read(id: Long) = artistRepository
-        .findOrThrow(id, userService.userId)
-        .toDomain()
+    fun read(id: Long) = artistRepository.findOrThrow(id, userService.userId)
 
     // update
 
     @Transactional
-    fun update(id: Long, artist: ArtistRequest) = artistRepository
+    fun update(id: Long, artist: ArtistRequest): ArtistEntity = artistRepository
         .findOrThrow(id, userService.userId)
         .apply {
             name = artist.name
             updatedAt = Instant.now()
-        }.toDomain()
+        }
 
     // delete
 

@@ -3,6 +3,7 @@ package org.musiccollection.entity
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.Id
+import org.musiccollection.domain.AlbumResponse
 import java.time.Instant
 
 @Entity
@@ -18,4 +19,16 @@ data class AlbumEntity(
     var filename: String?,
     val createdAt: Instant,
     var updatedAt: Instant
-)
+) {
+    fun toDomain() = AlbumResponse(
+        id,
+        userId,
+        artistId,
+        name,
+        year,
+        tracks,
+        filename,
+        createdAt,
+        updatedAt
+    )
+}

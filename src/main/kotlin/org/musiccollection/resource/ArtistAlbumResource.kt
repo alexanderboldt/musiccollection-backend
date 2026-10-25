@@ -26,7 +26,7 @@ class ArtistAlbumResource(private val artistAlbumService: ArtistAlbumService) {
     fun readAllAlbumsFromArtist(
         @Positive @PathParam(Resource.Param.ID) artistId: Long,
         @QueryParam(Resource.Param.SORT) sort: String?
-    ): List<AlbumResponse> {
-        return artistAlbumService.readAll(artistId, sort.convertToSort())
-    }
+    ): List<AlbumResponse> = artistAlbumService
+        .readAll(artistId, sort.convertToSort())
+        .map { it.toDomain() }
 }

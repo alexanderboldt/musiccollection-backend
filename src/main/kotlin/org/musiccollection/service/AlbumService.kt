@@ -1,8 +1,6 @@
 package org.musiccollection.service
 
 import org.musiccollection.domain.AlbumRequest
-import org.musiccollection.domain.AlbumResponse
-import org.musiccollection.mapper.toDomain
 import org.musiccollection.entity.AlbumEntity
 import org.musiccollection.repository.AlbumRepository
 import org.musiccollection.repository.ArtistRepository
@@ -23,7 +21,7 @@ class AlbumService(
     // create
 
     @Transactional
-    fun create(album: AlbumRequest): AlbumResponse {
+    fun create(album: AlbumRequest): AlbumEntity {
         artistRepository.existsOrThrow(album.artistId, userService.userId)
 
         val entity = AlbumEntity(
@@ -38,25 +36,21 @@ class AlbumService(
             Instant.now()
         )
 
-        return albumRepository.save(entity).toDomain()
+        return albumRepository.save(entity)
     }
 
     // read
 
     @Transactional
-    fun readAll(sort: Sort) = albumRepository
-        .findAll(userService.userId, sort)
-        .map { it.toDomain() }
+    fun readAll(sort: Sort) = albumRepository.findAll(userService.userId, sort)
 
     @Transactional
-    fun read(id: Long) = albumRepository
-        .findOrThrow(id, userService.userId)
-        .toDomain()
+    fun read(id: Long) = albumRepository.findOrThrow(id, userService.userId)
 
     // update
 
     @Transactional
-    fun update(id: Long, album: AlbumRequest): AlbumResponse {
+    fun update(id: Long, album: AlbumRequest): AlbumEntity {
         artistRepository.existsOrThrow(album.artistId, userService.userId)
 
         return albumRepository
@@ -67,7 +61,7 @@ class AlbumService(
                 year = album.year
                 tracks = album.tracks
                 updatedAt = Instant.now()
-            }.toDomain()
+            }
     }
 
     // delete
