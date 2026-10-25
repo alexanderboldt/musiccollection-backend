@@ -1,7 +1,7 @@
 package org.musiccollection.service
 
-import org.musiccollection.domain.ArtistRequest
-import org.musiccollection.entity.ArtistEntity
+import org.musiccollection.resource.domain.ArtistRequest
+import org.musiccollection.repository.entity.ArtistEntity
 import org.musiccollection.repository.ArtistRepository
 import io.quarkus.panache.common.Sort
 import jakarta.enterprise.context.ApplicationScoped

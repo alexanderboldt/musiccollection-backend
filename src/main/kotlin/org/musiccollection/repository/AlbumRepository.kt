@@ -1,6 +1,6 @@
 package org.musiccollection.repository
 
-import org.musiccollection.entity.AlbumEntity
+import org.musiccollection.repository.entity.AlbumEntity
 import io.quarkus.panache.common.Sort
 import jakarta.enterprise.context.ApplicationScoped
 

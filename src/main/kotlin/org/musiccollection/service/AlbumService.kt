@@ -1,7 +1,7 @@
 package org.musiccollection.service
 
-import org.musiccollection.domain.AlbumRequest
-import org.musiccollection.entity.AlbumEntity
+import org.musiccollection.resource.domain.AlbumRequest
+import org.musiccollection.repository.entity.AlbumEntity
 import org.musiccollection.repository.AlbumRepository
 import org.musiccollection.repository.ArtistRepository
 import io.quarkus.panache.common.Sort

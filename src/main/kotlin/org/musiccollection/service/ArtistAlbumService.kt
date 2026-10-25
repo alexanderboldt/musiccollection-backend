@@ -5,7 +5,7 @@ import org.musiccollection.repository.ArtistRepository
 import io.quarkus.panache.common.Sort
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.transaction.Transactional
-import org.musiccollection.entity.AlbumEntity
+import org.musiccollection.repository.entity.AlbumEntity
 
 @ApplicationScoped
 class ArtistAlbumService(

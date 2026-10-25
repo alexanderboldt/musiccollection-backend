@@ -1,10 +1,10 @@
 package org.musiccollection.util
 
 import org.musiccollection.Fixtures
-import org.musiccollection.domain.AlbumRequest
-import org.musiccollection.domain.AlbumResponse
-import org.musiccollection.domain.ArtistRequest
-import org.musiccollection.domain.ArtistResponse
+import org.musiccollection.resource.domain.AlbumRequest
+import org.musiccollection.resource.domain.AlbumResponse
+import org.musiccollection.resource.domain.ArtistRequest
+import org.musiccollection.resource.domain.ArtistResponse
 import io.kotest.matchers.comparables.shouldBeGreaterThan
 import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.nulls.shouldNotBeNull

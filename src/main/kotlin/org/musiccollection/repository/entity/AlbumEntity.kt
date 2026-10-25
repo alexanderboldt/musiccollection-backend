@@ -1,26 +1,32 @@
-package org.musiccollection.entity
+package org.musiccollection.repository.entity
 
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.Id
-import org.musiccollection.domain.ArtistResponse
+import org.musiccollection.resource.domain.AlbumResponse
 import java.time.Instant
 
 @Entity
-data class ArtistEntity(
+data class AlbumEntity(
     @Id
     @GeneratedValue
     val id: Long,
     val userId: String,
+    var artistId: Long,
     var name: String,
+    var year: Int,
+    var tracks: Int,
     var filename: String?,
     val createdAt: Instant,
     var updatedAt: Instant
 ) {
-    fun toDomain() = ArtistResponse(
+    fun toDomain() = AlbumResponse(
         id,
         userId,
+        artistId,
         name,
+        year,
+        tracks,
         filename,
         createdAt,
         updatedAt

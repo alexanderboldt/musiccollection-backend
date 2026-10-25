@@ -1,8 +1,8 @@
 package org.musiccollection.resource
 
 import org.musiccollection.Fixtures
-import org.musiccollection.domain.AlbumResponse
-import org.musiccollection.domain.ArtistResponse
+import org.musiccollection.resource.domain.AlbumResponse
+import org.musiccollection.resource.domain.ArtistResponse
 import org.musiccollection.util.asAlbum
 import org.musiccollection.util.createAlbum
 import org.musiccollection.util.createArtist

@@ -1,4 +1,4 @@
-package org.musiccollection.domain
+package org.musiccollection.resource.domain
 
 data class Error(
     val status: Int,

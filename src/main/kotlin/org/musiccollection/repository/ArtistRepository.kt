@@ -1,6 +1,6 @@
 package org.musiccollection.repository
 
-import org.musiccollection.entity.ArtistEntity
+import org.musiccollection.repository.entity.ArtistEntity
 import jakarta.enterprise.context.ApplicationScoped
 
 @ApplicationScoped

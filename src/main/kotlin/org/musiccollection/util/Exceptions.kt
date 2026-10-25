@@ -2,7 +2,7 @@ package org.musiccollection.util
 
 import jakarta.ws.rs.WebApplicationException
 import jakarta.ws.rs.core.Response
-import org.musiccollection.domain.Error
+import org.musiccollection.resource.domain.Error
 
 class BadRequestException : WebApplicationException(Response
     .status(Response.Status.BAD_REQUEST)

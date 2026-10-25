@@ -6,7 +6,7 @@ import jakarta.enterprise.context.ApplicationScoped
 import jakarta.transaction.Transactional
 import org.eclipse.microprofile.config.inject.ConfigProperty
 import org.jboss.resteasy.reactive.multipart.FileUpload
-import org.musiccollection.entity.ArtistEntity
+import org.musiccollection.repository.entity.ArtistEntity
 import java.io.InputStream
 import java.time.Instant
 

@@ -17,7 +17,7 @@ import jakarta.ws.rs.core.MediaType
 import jakarta.ws.rs.core.Response
 import org.jboss.resteasy.reactive.RestForm
 import org.jboss.resteasy.reactive.multipart.FileUpload
-import org.musiccollection.domain.AlbumResponse
+import org.musiccollection.resource.domain.AlbumResponse
 
 @Suppress("unused")
 @Path(Resource.Path.ALBUM_IMAGE)

@@ -1,4 +1,4 @@
-package org.musiccollection.domain
+package org.musiccollection.resource.domain
 
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Positive

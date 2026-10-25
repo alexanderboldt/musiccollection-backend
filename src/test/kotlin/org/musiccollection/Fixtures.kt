@@ -1,7 +1,7 @@
 package org.musiccollection
 
-import org.musiccollection.domain.AlbumRequest
-import org.musiccollection.domain.ArtistRequest
+import org.musiccollection.resource.domain.AlbumRequest
+import org.musiccollection.resource.domain.ArtistRequest
 import java.io.File
 
 object Fixtures {

@@ -1,6 +1,6 @@
 package org.musiccollection.resource
 
-import org.musiccollection.domain.AlbumResponse
+import org.musiccollection.resource.domain.AlbumResponse
 import org.musiccollection.service.ArtistAlbumService
 import org.musiccollection.util.convertToSort
 import io.smallrye.faulttolerance.api.RateLimit

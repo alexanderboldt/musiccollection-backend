@@ -1,13 +1,12 @@
 package org.musiccollection.resource
 
-import org.musiccollection.domain.ArtistRequest
+import org.musiccollection.resource.domain.ArtistRequest
 import org.musiccollection.service.ArtistService
 import org.musiccollection.util.convertToSort
 import io.smallrye.faulttolerance.api.RateLimit
 import jakarta.annotation.security.RolesAllowed
 import jakarta.validation.Valid
 import jakarta.validation.constraints.Positive
-import jakarta.validation.constraints.NotBlank
 import jakarta.ws.rs.Consumes
 import jakarta.ws.rs.DELETE
 import jakarta.ws.rs.GET
@@ -20,7 +19,7 @@ import jakarta.ws.rs.QueryParam
 import jakarta.ws.rs.core.MediaType
 import org.jboss.resteasy.reactive.ResponseStatus
 import org.jboss.resteasy.reactive.RestResponse
-import org.musiccollection.domain.ArtistResponse
+import org.musiccollection.resource.domain.ArtistResponse
 
 @Suppress("unused")
 @Path(Resource.Path.ARTIST)

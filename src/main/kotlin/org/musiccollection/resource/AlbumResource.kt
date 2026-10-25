@@ -1,6 +1,6 @@
 package org.musiccollection.resource
 
-import org.musiccollection.domain.AlbumRequest
+import org.musiccollection.resource.domain.AlbumRequest
 import org.musiccollection.service.AlbumService
 import org.musiccollection.util.convertToSort
 import io.smallrye.faulttolerance.api.RateLimit
@@ -19,7 +19,7 @@ import jakarta.ws.rs.QueryParam
 import jakarta.ws.rs.core.MediaType
 import org.jboss.resteasy.reactive.ResponseStatus
 import org.jboss.resteasy.reactive.RestResponse
-import org.musiccollection.domain.AlbumResponse
+import org.musiccollection.resource.domain.AlbumResponse
 
 @Suppress("unused")
 @Path(Resource.Path.ALBUM)
@@ -33,16 +33,22 @@ class AlbumResource(private val albumService: AlbumService) {
 
     @POST
     @ResponseStatus(RestResponse.StatusCode.CREATED)
-    fun create(@Valid album: AlbumRequest): AlbumResponse = albumService.create(album).toDomain()
+    fun create(@Valid album: AlbumRequest): AlbumResponse = albumService
+        .create(album)
+        .toDomain()
 
     // read
 
     @GET
-    fun readAll(@QueryParam(Resource.Param.SORT) sort: String?): List<AlbumResponse> = albumService.readAll(sort.convertToSort()).map { it.toDomain() }
+    fun readAll(@QueryParam(Resource.Param.SORT) sort: String?): List<AlbumResponse> = albumService.
+    readAll(sort.convertToSort())
+        .map { it.toDomain() }
 
     @GET
     @Path(Resource.Path.ID)
-    fun read(@Positive @PathParam(Resource.Param.ID) id: Long): AlbumResponse = albumService.read(id).toDomain()
+    fun read(@Positive @PathParam(Resource.Param.ID) id: Long): AlbumResponse = albumService
+        .read(id)
+        .toDomain()
 
     // update
 
@@ -51,7 +57,9 @@ class AlbumResource(private val albumService: AlbumService) {
     fun update(
         @Positive @PathParam(Resource.Param.ID) id: Long,
         @Valid album: AlbumRequest
-    ): AlbumResponse = albumService.update(id, album).toDomain()
+    ): AlbumResponse = albumService
+        .update(id, album)
+        .toDomain()
 
     // delete
 

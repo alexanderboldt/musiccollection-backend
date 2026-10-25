@@ -1,8 +1,8 @@
 package org.musiccollection.resource
 
 import org.musiccollection.Fixtures
-import org.musiccollection.domain.AlbumRequest
-import org.musiccollection.domain.ArtistResponse
+import org.musiccollection.resource.domain.AlbumRequest
+import org.musiccollection.resource.domain.ArtistResponse
 import org.musiccollection.util.asAlbum
 import org.musiccollection.util.asAlbums
 import org.musiccollection.util.ALBUM_ID

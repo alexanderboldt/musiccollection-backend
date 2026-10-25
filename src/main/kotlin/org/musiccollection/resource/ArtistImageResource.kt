@@ -17,7 +17,7 @@ import jakarta.ws.rs.core.MediaType
 import jakarta.ws.rs.core.Response
 import org.jboss.resteasy.reactive.RestForm
 import org.jboss.resteasy.reactive.multipart.FileUpload
-import org.musiccollection.domain.ArtistResponse
+import org.musiccollection.resource.domain.ArtistResponse
 
 @Suppress("unused")
 @Path(Resource.Path.ARTIST_IMAGE)
@@ -32,7 +32,9 @@ class ArtistImageResource(private val artistImageService: ArtistImageService) {
     fun uploadImage(
         @Positive @PathParam(Resource.Param.ID) id: Long,
         @NotNull @RestForm image: FileUpload
-    ): ArtistResponse = artistImageService.uploadImage(id, image).toDomain()
+    ): ArtistResponse = artistImageService
+        .uploadImage(id, image)
+        .toDomain()
 
     @GET
     @Produces(MediaType.APPLICATION_OCTET_STREAM)

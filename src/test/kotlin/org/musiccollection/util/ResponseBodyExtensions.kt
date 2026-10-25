@@ -1,7 +1,7 @@
 package org.musiccollection.util
 
-import org.musiccollection.domain.AlbumResponse
-import org.musiccollection.domain.ArtistResponse
+import org.musiccollection.resource.domain.AlbumResponse
+import org.musiccollection.resource.domain.ArtistResponse
 import io.restassured.common.mapper.TypeRef
 import io.restassured.response.ResponseBodyExtractionOptions
 
